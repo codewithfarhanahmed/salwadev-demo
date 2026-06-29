@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){try{var t=localStorage.getItem('salwadev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalwaDev Blog — Web Development, AI & SEO Insights for Pakistan & UK Tech</title>
+<meta name="description" content="The SalwaDev blog: expert insights on web development in Pakistan and the UK, AI agents, SEO, Shopify, and software outsourcing. Meet founder & CEO Farhan Ahmed, Co-CEO Obaid Ullah, and CTO Zain Ul Abideen.">
+<meta name="keywords" content="web development Pakistan, web development company UK, software house Pakistan, AI agents Pakistan, SEO services UK, Shopify development Pakistan, hire developers Pakistan, IT outsourcing UK, digital agency Rawalpindi, tech blog Pakistan, SalwaDev, Farhan Ahmed founder, Obaid Ullah Co-CEO, Zain Ul Abideen CTO">
+<meta property="og:title" content="SalwaDev Blog — Tech Insights for Pakistan & UK">
+<meta property="og:description" content="Web development, AI, and SEO insights for businesses in Pakistan and the UK — from Pakistan's founder-led digital agency.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://salwadev.com/blog.html">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* ── BLOG PAGE ── */
+.page-hero { position: relative; overflow: hidden; }
+
+.blog-layout { display: grid; grid-template-columns: 1fr; gap: 0; }
+
+/* Featured post */
+.featured-post {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 4rem;
+  background: var(--black2);
+}
+.featured-media {
+  background: linear-gradient(135deg, var(--card-bg), var(--black3));
+  min-height: 360px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+  border-right: 1px solid var(--border);
+}
+.featured-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; inset: 0;
+  opacity: 0.5;
+}
+.featured-media .featured-badge {
+  position: relative; z-index: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--acid);
+  text-align: center;
+  line-height: 1.1;
+}
+.featured-body { padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+.featured-meta { display: flex; gap: 1rem; align-items: center; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+.featured-meta .tag-pill { background: var(--acid); color: #0a0a0a; padding: 0.25rem 0.8rem; border-radius: 100px; font-weight: 700; }
+.featured-body h2 { font-size: clamp(1.6rem, 2.8vw, 2.4rem); margin-bottom: 1rem; }
+.featured-body p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+
+/* Article body */
+.article {
+  max-width: 820px;
+  margin: 0 auto;
+}
+.article h2.art-h2 {
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  margin: 3rem 0 1rem;
+  scroll-margin-top: 8rem;
+}
+.article h3.art-h3 {
+  font-size: 1.2rem;
+  margin: 2rem 0 0.8rem;
+  color: var(--white);
+}
+.article p { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-bottom: 1.3rem; }
+.article p strong { color: var(--white); }
+.article ul.art-list { list-style: none; margin: 0 0 1.6rem; padding: 0; }
+.article ul.art-list li {
+  position: relative; padding-left: 1.6rem; margin-bottom: 0.8rem;
+  color: var(--muted); font-size: 0.97rem; line-height: 1.75;
+}
+.article ul.art-list li::before {
+  content: ''; position: absolute; left: 0; top: 0.65rem;
+  width: 8px; height: 8px; background: var(--acid); border-radius: 50%;
+}
+.article .lead {
+  font-size: 1.15rem; color: var(--white); line-height: 1.8;
+  border-left: 3px solid var(--acid); padding-left: 1.4rem; margin-bottom: 2rem;
+}
+.leader-callout {
+  background: var(--black2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.2rem;
+  margin: 2.5rem 0;
+}
+.leader-callout h3 { color: var(--acid); margin-bottom: 1.2rem; font-size: 1rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.leader-row { display: flex; gap: 1rem; align-items: baseline; padding: 0.7rem 0; border-bottom: 1px solid var(--border); }
+.leader-row:last-child { border-bottom: none; }
+.leader-row .l-name { font-family: var(--font-display); font-weight: 600; color: var(--white); min-width: 160px; }
+.leader-row .l-role { color: var(--acid); font-size: 0.85rem; font-weight: 600; }
+.leader-row .l-desc { color: var(--muted); font-size: 0.9rem; }
+
+/* Post grid */
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.post-card {
+  background: var(--black2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: border-color 0.3s, transform 0.3s;
+  display: flex; flex-direction: column;
+}
+.post-card:hover { border-color: var(--acid); transform: translateY(-4px); }
+.post-card .post-tag { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--acid); font-weight: 700; margin-bottom: 0.9rem; }
+.post-card h3 { font-size: 1.15rem; margin-bottom: 0.7rem; line-height: 1.25; }
+.post-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; flex-grow: 1; }
+.post-card .post-meta { font-size: 0.72rem; color: var(--muted2); margin-top: 1.2rem; letter-spacing: 0.04em; }
+
+@media (max-width: 1024px) {
+  .featured-post { grid-template-columns: 1fr; }
+  .featured-media { border-right: none; border-bottom: 1px solid var(--border); min-height: 220px; }
+  .post-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .post-grid { grid-template-columns: 1fr; }
+  .featured-body { padding: 2rem; }
+  .leader-row { flex-direction: column; gap: 0.2rem; }
+  .leader-row .l-name { min-width: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>🇵🇰 Pakistan's boldest digital agency — serving startups & enterprises across Pakistan and the UK</span>
+  <div class="top-bar-right">
+    <a href="contact.html">Free Strategy Call</a>
+    <a href="https://wa.me/923165743324" target="_blank">WhatsApp Us</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Get a Quote →</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="team.html" onclick="toggleMenu()">Team</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--acid)">Contact →</a>
+</div>
+
+<div class="breadcrumb" style="padding:8.5rem 5rem 0; position:relative; z-index:10;">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>Blog</span>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="min-height:34vh;">
+  <div class="page-hero-tag">SalwaDev Blog</div>
+  <h1>Tech Insights for<br><span class="accent">Pakistan &amp; the UK</span></h1>
+  <p class="page-hero-sub">Practical guidance on web development, AI agents, SEO, and Shopify — written by a founder-led software house building for clients in Pakistan, the United Kingdom, and beyond.</p>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Web Development Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Web Development UK <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Agents <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Services <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Shopify Experts <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Software Outsourcing <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Web Development Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Web Development UK <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Agents <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Services <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Shopify Experts <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Software Outsourcing <span class="marquee-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- FEATURED POST -->
+<section>
+  <div class="featured-post reveal">
+    <div class="featured-media">
+      <img src="assets/images/farhancrop.png" alt="Farhan Ahmed — Founder & CEO of SalwaDev, a web development company in Pakistan">
+      <div class="featured-badge">Inside SalwaDev:<br>The Story &amp; The Team</div>
+    </div>
+    <div class="featured-body">
+      <div class="featured-meta">
+        <span class="tag-pill">Featured</span>
+        <span>Company</span>
+        <span>12 min read</span>
+      </div>
+      <h2>Meet SalwaDev: Pakistan's Founder-Led Tech Company Building for Pakistan &amp; the UK</h2>
+      <p>From a small Rawalpindi studio to a full-service software house — the people, the mission, and the technology behind one of Pakistan's most ambitious digital agencies serving UK and global clients.</p>
+      <a href="#full-story" class="btn-primary">Read the Story &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FULL ARTICLE -->
+<section id="full-story" style="padding-top:0;">
+  <article class="article reveal">
+
+    <div class="featured-meta" style="margin-bottom:1.5rem;">
+      <span class="tag-pill">Company</span>
+      <span>By Farhan Ahmed, Founder &amp; CEO</span>
+    </div>
+
+    <p class="lead">SalwaDev is a Pakistan-based web development and AI company helping startups and enterprises in Pakistan and the United Kingdom ship faster, rank higher, and grow with confidence. This is the story of who we are, who leads us, and how we build.</p>
+
+    <p>If you are searching for a reliable <strong>web development company in Pakistan</strong> — or a <strong>software house that works with UK clients</strong> — you have probably noticed how hard it is to separate marketing noise from real engineering capability. SalwaDev was founded to close exactly that gap: world-class digital execution, founder-level accountability, and pricing that makes sense for businesses in both Pakistani and UK markets.</p>
+
+    <h2 class="art-h2" id="who-we-are">Who We Are</h2>
+    <p>SalwaDev is a founder-led digital agency headquartered in Rawalpindi, Pakistan, delivering <strong>custom web development, AI agents, SEO, and Shopify e-commerce</strong> to clients across Pakistan, the UK, and global markets. We are deliberately small and senior — every project is touched by people who have shipped real products, not juniors learning on your budget.</p>
+    <p>Our work spans <strong>enterprise websites, web apps, Shopify stores, AI automation, technical SEO, and brand design</strong>. Whether you are a UK e-commerce brand that needs a faster Shopify storefront, a Pakistani SME launching its first professional website, or a startup that needs an AI agent to handle customer support, we build it end to end.</p>
+
+    <h2 class="art-h2" id="leadership">Founder &amp; Leadership Team</h2>
+    <p>SalwaDev is led by three people whose names are on the door — and who still ship work every week. Our leadership combines hands-on engineering with real business strategy, which is rare in the Pakistani software house landscape.</p>
+
+    <div class="leader-callout">
+      <h3>SalwaDev Leadership</h3>
+      <div class="leader-row">
+        <span class="l-name">Farhan Ahmed</span>
+        <span class="l-role">Founder &amp; CEO</span>
+      </div>
+      <p class="l-desc" style="margin:0.6rem 0 1rem;"><strong>Farhan Ahmed</strong> is the <strong>Founder and CEO of SalwaDev</strong>. He set the company's vision and continues to lead client strategy and full-stack development. With 3+ years building products for Pakistani and international clients, Farhan founded SalwaDev to prove that a Pakistan-based team can deliver work that competes with any UK or US agency. As both founder and CEO, he stays personally involved in the technical and commercial direction of every major engagement.</p>
+      <div class="leader-row">
+        <span class="l-name">Obaid Ullah</span>
+        <span class="l-role">Co-CEO</span>
+      </div>
+      <p class="l-desc" style="margin:0.6rem 0 1rem;"><strong>Obaid Ullah</strong> serves as <strong>Co-CEO of SalwaDev</strong>, driving growth, operations, and client partnerships. He ensures that the company's promises translate into measurable outcomes — and that every client relationship, in Pakistan or the UK, delivers lasting value.</p>
+      <div class="leader-row">
+        <span class="l-name">Zain Ul Abideen</span>
+        <span class="l-role">CTO</span>
+      </div>
+      <p class="l-desc" style="margin:0.6rem 0 0;"><strong>Zain Ul Abideen</strong> is the <strong>Chief Technology Officer (CTO) of SalwaDev</strong>. He owns the company's engineering direction and technical quality across React, Node.js, WordPress, and AI systems, making sure everything we ship is fast, secure, and built to scale.</p>
+    </div>
+
+    <p>Together, <strong>Founder &amp; CEO Farhan Ahmed</strong>, <strong>Co-CEO Obaid Ullah</strong>, and <strong>CTO Zain Ul Abideen</strong> form a leadership team that is technical, accountable, and genuinely invested in client success.</p>
+
+    <h2 class="art-h2" id="why-pakistan-uk">Why Pakistan + UK Is a Winning Combination</h2>
+    <p>Pakistan has become one of the world's strongest hubs for <strong>software development, IT outsourcing, and digital services</strong>. The country produces tens of thousands of skilled developers each year, and the time-zone overlap with the UK makes real-time collaboration easy. For UK businesses, partnering with a quality <strong>Pakistani software house</strong> means access to senior engineering talent at a fraction of London agency rates — without sacrificing quality or communication.</p>
+    <p>SalwaDev was built for exactly this bridge. We understand UK client expectations around quality, GDPR-aware data handling, and professional communication, while operating from a Pakistani cost base that lets ambitious companies do more with their budget.</p>
+    <ul class="art-list">
+      <li><strong>For UK clients:</strong> senior developers, fast delivery, transparent fixed pricing, and a time zone that overlaps your working day.</li>
+      <li><strong>For Pakistani clients:</strong> enterprise-grade websites and AI systems that meet international standards, built locally in Rawalpindi.</li>
+      <li><strong>For startups everywhere:</strong> a founder-led team that moves fast — from brief to working prototype in 48 hours.</li>
+    </ul>
+
+    <h2 class="art-h2" id="what-we-do">What We Build</h2>
+    <h3 class="art-h3">Web Development (Pakistan &amp; UK)</h3>
+    <p>We build high-performance websites and web apps using React, Next.js, Node.js, and WordPress. From landing pages to full-stack platforms, our <strong>web development services</strong> are engineered for speed, SEO, and conversion — whether the audience is in Karachi, Lahore, London, or Manchester.</p>
+    <h3 class="art-h3">AI Agents &amp; Automation</h3>
+    <p>Our <strong>AI agents</strong> handle customer support, lead generation, content workflows, and repetitive business processes around the clock. AI is one of the fastest-growing areas in both the Pakistani and UK tech markets, and we help businesses adopt it without the hype.</p>
+    <h3 class="art-h3">SEO Services</h3>
+    <p>Technical SEO, on-page optimisation, and content strategy that compounds over time. Our <strong>SEO services</strong> help Pakistani and UK businesses rank for the keywords that actually drive revenue — not vanity traffic.</p>
+    <h3 class="art-h3">Shopify &amp; E-Commerce</h3>
+    <p>Custom Shopify storefronts, checkout optimisation, and app integrations. <strong>Shopify development</strong> is in high demand among UK retailers, and we build stores that convert browsers into buyers.</p>
+
+    <h2 class="art-h2" id="how-we-work">How We Work</h2>
+    <p>We keep it refreshingly simple: a discovery call, a clear fixed-price proposal within 48 hours, weekly progress via WhatsApp, and 30 days of free post-launch support. No account managers, no telephone game — you talk directly to the people building your product, including, on key projects, the founder himself.</p>
+
+    <h2 class="art-h2" id="work-with-us">Work With SalwaDev</h2>
+    <p>If you are looking for a trusted <strong>web development and AI partner in Pakistan</strong> that understands the <strong>UK market</strong>, we would love to talk. Book a free strategy call and tell us what you are building — Founder &amp; CEO Farhan Ahmed and the team will map out exactly how to get you there.</p>
+    <p><a href="contact.html" class="btn-primary" style="margin-top:0.5rem;">Book a Free Strategy Call &rarr;</a></p>
+  </article>
+</section>
+
+<!-- MORE POSTS -->
+<section style="background:var(--black2);">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">More From the Blog</div>
+      <h2>Insights for Pakistani &amp;<br><span class="accent">UK Tech Businesses</span></h2>
+    </div>
+    <p>Guides, opinions, and case-study thinking on building digital products that perform across markets.</p>
+  </div>
+
+  <div class="post-grid reveal">
+    <div class="post-card stagger-child">
+      <div class="post-tag">Web Development</div>
+      <h3>How Much Does a Website Cost in Pakistan vs the UK in 2026?</h3>
+      <p>A transparent breakdown of web development pricing — from SME brochure sites to enterprise platforms — and why Pakistani software houses offer UK-quality work at a fraction of London rates.</p>
+      <div class="post-meta">SalwaDev Team · 8 min read</div>
+    </div>
+    <div class="post-card stagger-child">
+      <div class="post-tag">AI &amp; Automation</div>
+      <h3>AI Agents for Small Businesses: A Practical 2026 Guide</h3>
+      <p>What AI agents actually are, where they create real ROI, and how Pakistani and UK businesses can deploy customer-support and lead-gen automation without over-spending.</p>
+      <div class="post-meta">Zain Ul Abideen, CTO · 9 min read</div>
+    </div>
+    <div class="post-card stagger-child">
+      <div class="post-tag">SEO</div>
+      <h3>Technical SEO Checklist to Rank in Pakistan &amp; the UK</h3>
+      <p>Core Web Vitals, on-page structure, local SEO, and the technical fundamentals that help your site rank in both Pakistani and UK Google search results.</p>
+      <div class="post-meta">SalwaDev Team · 7 min read</div>
+    </div>
+    <div class="post-card stagger-child">
+      <div class="post-tag">Outsourcing</div>
+      <h3>Why UK Companies Outsource Development to Pakistan</h3>
+      <p>Time-zone overlap, senior talent, and cost efficiency — a candid look at the benefits and the pitfalls of hiring a Pakistani software house as a UK business.</p>
+      <div class="post-meta">Obaid Ullah, Co-CEO · 10 min read</div>
+    </div>
+    <div class="post-card stagger-child">
+      <div class="post-tag">E-Commerce</div>
+      <h3>Shopify Store Optimisation: From 1% to 4% Conversion</h3>
+      <p>The exact UX, speed, and checkout changes we use to lift Shopify conversion rates for e-commerce brands in Pakistan and the UK.</p>
+      <div class="post-meta">SalwaDev Team · 6 min read</div>
+    </div>
+    <div class="post-card stagger-child">
+      <div class="post-tag">Founder Notes</div>
+      <h3>Building a Tech Company From Rawalpindi: Founder's Perspective</h3>
+      <p>Founder &amp; CEO Farhan Ahmed on starting SalwaDev in Pakistan, earning the trust of international clients, and the future of the Pakistani tech ecosystem.</p>
+      <div class="post-meta">Farhan Ahmed, Founder &amp; CEO · 11 min read</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner" style="background:var(--acid);padding:5.5rem 5rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;">
+  <div>
+    <h2 style="color:#0a0a0a;font-size:clamp(1.8rem,3.2vw,2.8rem);letter-spacing:-0.03em;margin-bottom:0.6rem;">Have a Project in Pakistan<br>or the UK? Let's Talk.</h2>
+    <p style="color:rgba(0,0,0,0.6);font-size:0.95rem;">Book a free 30-minute strategy call with our founder-led team.</p>
+  </div>
+  <a href="contact.html" class="btn-dark" style="background:#0a0a0a;color:#fff;">Start a Project &rarr;</a>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-top-bar">
+    <span class="footer-top-bar-left">Serving clients across Pakistan and globally since 2022</span>
+    <div class="footer-top-bar-right">
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+      <p>Pakistan's boldest digital agency — enterprise websites, AI systems, and brand visuals that drive measurable business growth.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923165743324" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="mailto:farhan.riphah21@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Web Development</a></li><li><a href="services.html">UI/UX Design</a></li><li><a href="services.html">SEO Optimisation</a></li><li><a href="services.html">Shopify Stores</a></li><li><a href="services.html">AI Agents</a></li><li><a href="services.html">Graphic Design</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Careers</a></li></ul></div>
+    <div class="footer-col"><h4>Get in Touch</h4>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="https://wa.me/923165743324">+92 316 5743324</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:farhan.riphah21@gmail.com">farhan.riphah21@gmail.com</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rawalpindi, Pakistan</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 SalwaDev. All rights reserved.</span>
+    <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <span>Built with precision in Pakistan 🇵🇰</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/923165743324" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884Z"/></svg>
+</a>
+
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

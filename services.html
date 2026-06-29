@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){try{var t=localStorage.getItem('salwadev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Web Dev, SEO, AI Agents, Shopify | SalwaDev Pakistan</title>
+<meta name="description" content="SalwaDev offers web development, UI/UX design, SEO optimization, Shopify store development, AI agents, and graphic design services in Pakistan.">
+<meta name="keywords" content="web development services Pakistan, SEO services Pakistan, Shopify store development, AI agent development, UI UX design Pakistan, graphic design Pakistan">
+<link rel="canonical" href="https://salwadev.com/services.html">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* Services page extras */
+.svc-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 5rem;
+}
+.svc-detail-card {
+  background: var(--black);
+  padding: 3.5rem 3rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s;
+  perspective: 600px;
+}
+.svc-detail-card:hover { background: var(--card-bg); }
+.svc-detail-card::after {
+  content:'';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--acid);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform 0.45s ease;
+}
+.svc-detail-card:hover::after { transform: scaleY(1); }
+.svc-detail-inner {
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.svc-detail-card:hover .svc-detail-inner { transform: translateX(8px); }
+
+.svc-detail-num {
+  font-family: var(--font-display);
+  font-size: 5rem; font-weight: 700;
+  color: rgba(200,255,0,0.05);
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  line-height: 1; pointer-events: none;
+  transition: color 0.35s;
+}
+.svc-detail-card:hover .svc-detail-num { color: rgba(200,255,0,0.1); }
+
+.svc-detail-icon {
+  width: 56px; height: 56px;
+  border: 1px solid rgba(200,255,0,0.2);
+  border-radius: 2px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 2rem;
+  transition: all 0.3s;
+}
+.svc-detail-card:hover .svc-detail-icon {
+  border-color: var(--acid);
+  background: rgba(200,255,0,0.07);
+  transform: rotateY(15deg) rotateX(5deg);
+}
+.svc-detail-icon svg { width: 24px; height: 24px; stroke: var(--acid); fill: none; stroke-width: 1.5; }
+
+.svc-detail-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-display); font-weight: 700;
+}
+.svc-detail-card > p { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+
+.svc-features { list-style: none; margin-bottom: 2rem; }
+.svc-features li {
+  font-size: 0.85rem; color: var(--muted);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.svc-features li::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--acid); flex-shrink: 0;
+}
+.svc-features li:last-child { border-bottom: none; }
+
+/* Canvas on hero */
+.page-hero { position: relative; overflow: hidden; }
+
+/* Process strip */
+.process-strip {
+  background: var(--black2);
+  padding: 5rem 4rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.process-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+.process-step {
+  background: var(--black);
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: background 0.3s;
+}
+.process-step:hover { background: var(--card-bg); }
+.process-step-num {
+  font-family: var(--font-display);
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--acid);
+  margin-bottom: 1rem; display: block;
+}
+.process-step h3 { margin-bottom: 0.5rem; }
+.process-step p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+@media (max-width: 1024px) {
+  .svc-detail-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .process-strip { padding: 4rem 2rem; }
+}
+@media (max-width: 640px) {
+  .process-grid { grid-template-columns: 1fr; }
+  .svc-detail-card { padding: 2.5rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>🇵🇰 Pakistan's boldest digital agency — turning ideas into enterprise-grade products</span>
+  <div class="top-bar-right">
+    <a href="contact.html">Free Strategy Call</a>
+    <a href="https://wa.me/923165743324" target="_blank">WhatsApp Us</a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Get a Quote →</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="team.html" onclick="toggleMenu()">Team</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--acid)">Contact →</a>
+</div>
+<div class="breadcrumb" style="padding:8.5rem 5rem 0; position:relative; z-index:10;">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>Services</span>
+</div>
+
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-tag">Services</div>
+  <h1><span class="outline">Everything</span><br>You Need to<br><span style="color:var(--acid)">Win Online</span></h1>
+  <p class="page-hero-sub">Six integrated disciplines — delivered by specialists, coordinated as one unified team — engineered to make your business grow faster online.</p>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Web Development <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Shopify Experts <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Automation <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Billboard Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Web Development <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Shopify Experts <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Automation <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Billboard Design <span class="marquee-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- DETAILED SERVICES -->
+<section style="background:var(--black); padding-top:5rem; padding-bottom:0;">
+  <div class="reveal">
+    <div class="section-tag">What We Do</div>
+    <h2>Six Services.<br>One <span class="accent">Cohesive Strategy.</span></h2>
+  </div>
+
+  <div class="svc-detail-grid reveal">
+
+    <div class="svc-detail-card stagger-child">
+      <div class="svc-detail-num">01</div>
+      <div class="svc-detail-inner">
+        <div class="svc-detail-icon">
+          <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h2>Web Development</h2>
+        <p>We engineer websites and web apps that load fast, rank well, and convert visitors into clients. Built with battle-tested technologies and deployed for real-world performance.</p>
+        <ul class="svc-features">
+          <li>Custom Node.js &amp; React applications</li>
+          <li>WordPress theme &amp; plugin development</li>
+          <li>Landing page design &amp; CRO</li>
+          <li>Performance optimisation (Core Web Vitals)</li>
+          <li>API integrations &amp; third-party services</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Get a Web Quote &rarr;</a>
+      </div>
+    </div>
+
+    <div class="svc-detail-card stagger-child">
+      <div class="svc-detail-num">02</div>
+      <div class="svc-detail-inner">
+        <div class="svc-detail-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        </div>
+        <h2>UI/UX Design</h2>
+        <p>Design that goes beyond aesthetics — every interaction is mapped, tested, and optimised to reduce drop-off and guide users toward conversion.</p>
+        <ul class="svc-features">
+          <li>User research &amp; competitive analysis</li>
+          <li>Wireframing &amp; interactive prototyping</li>
+          <li>Figma design systems &amp; component libraries</li>
+          <li>Mobile-first responsive layouts</li>
+          <li>Usability testing &amp; iteration</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Get a Design Quote &rarr;</a>
+      </div>
+    </div>
+
+    <div class="svc-detail-card stagger-child">
+      <div class="svc-detail-num">03</div>
+      <div class="svc-detail-inner">
+        <div class="svc-detail-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h2>SEO Optimization</h2>
+        <p>Get found by the right people at the right moment. Our SEO strategies are built for long-term organic growth — not short-lived tricks that evaporate with the next algorithm update.</p>
+        <ul class="svc-features">
+          <li>Technical SEO audit &amp; fix</li>
+          <li>Keyword research &amp; content strategy</li>
+          <li>On-page &amp; meta optimisation</li>
+          <li>Local SEO for Pakistan markets</li>
+          <li>Monthly analytics &amp; reporting</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Boost My Rankings &rarr;</a>
+      </div>
+    </div>
+
+    <div class="svc-detail-card stagger-child">
+      <div class="svc-detail-num">04</div>
+      <div class="svc-detail-inner">
+        <div class="svc-detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        </div>
+        <h2>Shopify Stores</h2>
+        <p>From concept to checkout — we build Shopify stores that are as beautiful as they are profitable. Custom themes, smooth UX, and proven conversion mechanics baked in from day one.</p>
+        <ul class="svc-features">
+          <li>Custom Shopify theme development</li>
+          <li>Product page &amp; collection optimisation</li>
+          <li>Checkout flow &amp; abandoned cart recovery</li>
+          <li>App integration &amp; automation</li>
+          <li>Shopify Plus migration</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Build My Store &rarr;</a>
+      </div>
+    </div>
+
+    <div class="svc-detail-card stagger-child">
+      <div class="svc-detail-num">05</div>
+      <div class="svc-detail-inner">
+        <div class="svc-detail-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+        </div>
+        <h2>AI Agents</h2>
+        <p>Stop trading time for tasks. Our custom AI agents run automated workflows that would cost you 10× more in manual labour — handling support, leads, and content around the clock.</p>
+        <ul class="svc-features">
+          <li>Customer support chatbot (WhatsApp / Web)</li>
+          <li>Lead generation &amp; qualification agents</li>
+          <li>Content creation automation pipelines</li>
+          <li>CRM &amp; data integration</li>
+          <li>LLM fine-tuning for your business domain</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Automate My Business &rarr;</a>
+      </div>
+    </div>
+
+    <div class="svc-detail-card stagger-child">
+      <div class="svc-detail-num">06</div>
+      <div class="svc-detail-inner">
+        <div class="svc-detail-icon">
+          <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="14.5" r="2.5"/><circle cx="8.5" cy="14.5" r="2.5"/></svg>
+        </div>
+        <h2>Graphic &amp; Billboard Design</h2>
+        <p>Visual communication that stops people mid-scroll or mid-commute. We create brand identity assets, social content, and outdoor advertising that commands attention at every scale.</p>
+        <ul class="svc-features">
+          <li>Brand identity &amp; logo design</li>
+          <li>Social media graphics &amp; templates</li>
+          <li>Outdoor billboard &amp; banner design</li>
+          <li>Print collateral &amp; packaging</li>
+          <li>Motion graphics &amp; animation</li>
+        </ul>
+        <a href="contact.html" class="btn-primary">Start Designing &rarr;</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div class="process-strip reveal">
+  <div class="section-tag">How We Work</div>
+  <h2>Our Process is<br><span class="accent">Refreshingly Simple</span></h2>
+  <div class="process-grid">
+    <div class="process-step stagger-child">
+      <span class="process-step-num">STEP 01</span>
+      <h3>Discovery Call</h3>
+      <p>We spend 30 minutes understanding your goals, audience, and current pain points. No sales pitch — just honest questions.</p>
+    </div>
+    <div class="process-step stagger-child">
+      <span class="process-step-num">STEP 02</span>
+      <h3>Strategy &amp; Proposal</h3>
+      <p>Within 48 hours we deliver a clear project scope, timeline, and fixed price. No vague estimates, no hidden fees.</p>
+    </div>
+    <div class="process-step stagger-child">
+      <span class="process-step-num">STEP 03</span>
+      <h3>Build &amp; Iterate</h3>
+      <p>Weekly check-ins via WhatsApp. You see progress in real time and can redirect at any stage — no waiting until the end.</p>
+    </div>
+    <div class="process-step stagger-child">
+      <span class="process-step-num">STEP 04</span>
+      <h3>Launch &amp; Support</h3>
+      <p>We don't disappear at launch. 30 days of post-launch support is included with every project, free.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-banner" style="background:var(--acid);padding:5rem 4rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;">
+  <div>
+    <h2 style="color:var(--black);font-size:clamp(2rem,3.5vw,3rem);letter-spacing:-0.03em;margin-bottom:0.5rem;">Not Sure Which Service<br>You Need?</h2>
+    <p style="color:rgba(0,0,0,0.6);font-size:1rem;">Tell us your problem. We'll tell you exactly what to do.</p>
+  </div>
+  <a href="contact.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--black);color:var(--white);font-family:var(--font-display);font-weight:700;font-size:0.88rem;padding:1rem 2.2rem;border-radius:4px;text-decoration:none;white-space:nowrap;transition:transform 0.2s;">Let's Talk &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+
+
+
+<footer class="site-footer">
+  <div class="footer-top-bar">
+    <span class="footer-top-bar-left">Serving clients across Pakistan and globally since 2022</span>
+    <div class="footer-top-bar-right">
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+      <p>Pakistan's boldest digital agency — enterprise websites, AI systems, and brand visuals that drive measurable business growth.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923165743324" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="mailto:farhan.riphah21@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Web Development</a></li><li><a href="services.html">UI/UX Design</a></li><li><a href="services.html">SEO Optimisation</a></li><li><a href="services.html">Shopify Stores</a></li><li><a href="services.html">AI Agents</a></li><li><a href="services.html">Graphic Design</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Careers</a></li></ul></div>
+    <div class="footer-col"><h4>Get in Touch</h4>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="https://wa.me/923165743324">+92 316 5743324</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:farhan.riphah21@gmail.com">farhan.riphah21@gmail.com</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rawalpindi, Pakistan</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 SalwaDev. All rights reserved.</span>
+    <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <span>Built with precision in Pakistan 🇵🇰</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/923165743324" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

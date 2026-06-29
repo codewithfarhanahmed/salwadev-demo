@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){try{var t=localStorage.getItem('salwadev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Live Client Websites by SalwaDev | Pakistan & UK</title>
+<meta name="description" content="Explore live websites built by SalwaDev — industrial services, distribution, UK construction estimating, and e-commerce. Real projects, real clients, across Pakistan and the UK.">
+<meta name="keywords" content="SalwaDev portfolio, live websites Pakistan, web development clients UK, construction estimating website, distributor website Rawalpindi, e-commerce Pakistan, industrial services website">
+<meta property="og:title" content="SalwaDev Portfolio — Live Client Websites">
+<meta property="og:description" content="A showcase of live websites delivered by SalwaDev for clients across Pakistan and the UK.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://salwadev.com/portfolio.html">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* ── PORTFOLIO PAGE ── */
+.page-hero { position: relative; overflow: hidden; }
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.portfolio-card {
+  background: var(--black2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+}
+.portfolio-card:hover { border-color: var(--acid); transform: translateY(-5px); }
+
+.pc-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--card-bg), var(--black3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.pc-media .pc-monogram {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  letter-spacing: 0.04em;
+  color: var(--acid);
+  text-align: center;
+  line-height: 1.05;
+  padding: 1rem;
+  z-index: 2;
+}
+.pc-media .pc-domain {
+  position: absolute;
+  bottom: 0.9rem; left: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 2;
+}
+.pc-media::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 38px 38px;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.pc-status {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  z-index: 3;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.8rem;
+  border-radius: 100px;
+  font-family: var(--font-display);
+}
+.pc-status.live { background: var(--acid); color: #0a0a0a; }
+.pc-status.soon { background: rgba(255,170,0,0.15); color: #ffaa00; border: 1px solid rgba(255,170,0,0.4); }
+
+.pc-body { padding: 2rem; display: flex; flex-direction: column; flex-grow: 1; }
+.pc-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 0.8rem;
+}
+.pc-body h3 { font-size: 1.35rem; margin-bottom: 0.4rem; letter-spacing: 0; }
+.pc-region {
+  font-size: 0.78rem;
+  color: var(--muted2);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.pc-region svg { width: 13px; height: 13px; stroke: var(--acid); fill: none; stroke-width: 1.5; }
+.pc-body p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; flex-grow: 1; margin-bottom: 1.6rem; }
+
+.pc-actions { display: flex; align-items: center; gap: 1rem; }
+.pc-visit {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--acid);
+  color: #0a0a0a;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+.pc-visit:hover { transform: translateY(-2px); background: var(--acid-hover); }
+.pc-visit svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+.pc-visit.disabled {
+  background: transparent;
+  color: var(--muted2);
+  border: 1px solid var(--border);
+  pointer-events: none;
+  cursor: default;
+}
+.pc-url {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  word-break: break-all;
+}
+.pc-url:hover { color: var(--acid); }
+
+@media (max-width: 900px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>🇵🇰 Pakistan's boldest digital agency — turning ideas into enterprise-grade products</span>
+  <div class="top-bar-right">
+    <a href="contact.html">Free Strategy Call</a>
+    <a href="https://wa.me/923165743324" target="_blank">WhatsApp Us</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Get a Quote →</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="team.html" onclick="toggleMenu()">Team</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--acid)">Contact →</a>
+</div>
+
+<div class="breadcrumb" style="padding:8.5rem 5rem 0; position:relative; z-index:10;">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>Portfolio</span>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="min-height:36vh;">
+  <div class="page-hero-tag">Live Projects</div>
+  <h1>Websites We've<br><span class="accent">Brought to Life</span></h1>
+  <p class="page-hero-sub">A selection of live client websites built and delivered by SalwaDev — spanning industrial services, local distribution, UK construction estimating, and e-commerce. Click through and see the work for yourself.</p>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Industrial Services <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Local Business <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">UK Construction <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">E-Commerce <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Live Client Sites <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Pakistan &amp; UK <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Industrial Services <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Local Business <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">UK Construction <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">E-Commerce <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Live Client Sites <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Pakistan &amp; UK <span class="marquee-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- PORTFOLIO GRID -->
+<section>
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">Featured Work</div>
+      <h2>Selected Client<br><span class="accent">Websites</span></h2>
+    </div>
+    <p>Every project here is a real, live website built for a real client — solving a specific business problem and built to perform.</p>
+  </div>
+
+  <div class="portfolio-grid reveal">
+
+    <!-- LOOPM TECH -->
+    <div class="portfolio-card stagger-child">
+      <div class="pc-media">
+        <div class="pc-monogram">LoopM&nbsp;Tech</div>
+        <span class="pc-domain">loopmtech.com</span>
+        <span class="pc-status live">Live</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-tag">Industrial · Web Development</div>
+        <h3>LoopM Tech</h3>
+        <div class="pc-region">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Industrial Sector
+        </div>
+        <p>A technology company delivering specialised services to the industrial sector. We built a clean, professional web presence that communicates LoopM Tech's engineering expertise and helps industrial clients understand and request their services.</p>
+        <div class="pc-actions">
+          <a href="https://loopmtech.com" target="_blank" rel="noopener" class="pc-visit">
+            Visit Site
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </a>
+          <a href="https://loopmtech.com" target="_blank" rel="noopener" class="pc-url">loopmtech.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAST PACKAGES -->
+    <div class="portfolio-card stagger-child">
+      <div class="pc-media">
+        <div class="pc-monogram">Fast&nbsp;Packages</div>
+        <span class="pc-domain">fastpackages.com.pk</span>
+        <span class="pc-status live">Live</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-tag">Local Business · Distribution</div>
+        <h3>Fast Packages</h3>
+        <div class="pc-region">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Rawalpindi, Pakistan
+        </div>
+        <p>A Rawalpindi-based local business operating as a distributor of Zil tapes. We gave Fast Packages a trustworthy online storefront that showcases their product range and makes it easy for local buyers and retailers to get in touch and place orders.</p>
+        <div class="pc-actions">
+          <a href="https://fastpackages.com.pk" target="_blank" rel="noopener" class="pc-visit">
+            Visit Site
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </a>
+          <a href="https://fastpackages.com.pk" target="_blank" rel="noopener" class="pc-url">fastpackages.com.pk</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCUBUILD ESTIMATE -->
+    <div class="portfolio-card stagger-child">
+      <div class="pc-media">
+        <div class="pc-monogram">AccuBuild<br>Estimate</div>
+        <span class="pc-domain">accubuildestimate.com</span>
+        <span class="pc-status live">Live</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-tag">Construction · Estimating</div>
+        <h3>AccuBuild Estimate</h3>
+        <div class="pc-region">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          United Kingdom
+        </div>
+        <p>A professional estimating company serving construction sites across the UK. We delivered a polished, credibility-focused website that presents AccuBuild's estimating services to UK contractors and converts visitors into qualified enquiries.</p>
+        <div class="pc-actions">
+          <a href="https://accubuildestimate.com" target="_blank" rel="noopener" class="pc-visit">
+            Visit Site
+            <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+          </a>
+          <a href="https://accubuildestimate.com" target="_blank" rel="noopener" class="pc-url">accubuildestimate.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- THE ANIMAL MART -->
+    <div class="portfolio-card stagger-child">
+      <div class="pc-media">
+        <div class="pc-monogram">The&nbsp;Animal&nbsp;Mart</div>
+        <span class="pc-domain">theanimalmart.com</span>
+        <span class="pc-status soon">Under Development</span>
+      </div>
+      <div class="pc-body">
+        <div class="pc-tag">E-Commerce · Pet Food</div>
+        <h3>The Animal Mart</h3>
+        <div class="pc-region">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Pakistan
+        </div>
+        <p>An online, Pakistan-based pet food store currently in development. The Animal Mart will offer a smooth e-commerce experience for pet owners to browse and order quality pet food online. Launching soon — stay tuned.</p>
+        <div class="pc-actions">
+          <span class="pc-visit disabled">Coming Soon</span>
+          <span class="pc-url" style="color:var(--muted2);">theanimalmart.com</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner" style="background:var(--acid);padding:5.5rem 5rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;">
+  <div>
+    <h2 style="color:#0a0a0a;font-size:clamp(1.8rem,3.2vw,2.8rem);letter-spacing:0;margin-bottom:0.6rem;">Want Your Website<br>On This List?</h2>
+    <p style="color:rgba(0,0,0,0.6);font-size:0.95rem;">Let's build something worth showing off. Book a free strategy call today.</p>
+  </div>
+  <a href="contact.html" class="btn-dark" style="background:#0a0a0a;color:#fff;">Start a Project &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-top-bar">
+    <span class="footer-top-bar-left">Serving clients across Pakistan and globally since 2022</span>
+    <div class="footer-top-bar-right">
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+      <p>Pakistan's boldest digital agency — enterprise websites, AI systems, and brand visuals that drive measurable business growth.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923165743324" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="mailto:farhan.riphah21@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Web Development</a></li><li><a href="services.html">UI/UX Design</a></li><li><a href="services.html">SEO Optimisation</a></li><li><a href="services.html">Shopify Stores</a></li><li><a href="services.html">AI Agents</a></li><li><a href="services.html">Graphic Design</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Careers</a></li></ul></div>
+    <div class="footer-col"><h4>Get in Touch</h4>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="https://wa.me/923165743324">+92 316 5743324</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:farhan.riphah21@gmail.com">farhan.riphah21@gmail.com</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rawalpindi, Pakistan</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 SalwaDev. All rights reserved.</span>
+    <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <span>Built with precision in Pakistan 🇵🇰</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/923165743324" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884Z"/></svg>
+</a>
+
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){try{var t=localStorage.getItem('salwadev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About SalwaDev — Pakistan's Enterprise Digital Agency</title>
+<meta name="description" content="SalwaDev is Pakistan's leading digital agency built to deliver enterprise websites, AI systems and brand visuals. Meet the team behind the work.">
+<link rel="canonical" href="https://salwadev.com/about.html">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-hero { position: relative; overflow: hidden; }
+
+/* Story */
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; }
+.story-visual { position: relative; height: 560px; }
+.story-img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); filter: grayscale(20%) contrast(1.05); display: block; }
+.story-badge {
+  position: absolute; bottom: 2.5rem; left: -2rem;
+  background: var(--acid); color: var(--black);
+  padding: 1.6rem; border-radius: var(--radius);
+}
+.story-badge .big { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; display: block; line-height: 1; }
+.story-badge .small { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.3rem; display: block; }
+.story-visual-wrap { perspective: 800px; transition: transform 0.5s ease; }
+.story-visual-wrap:hover { transform: rotateY(-3deg) rotateX(2deg); }
+.story-text p { color: var(--muted); font-size: 1rem; line-height: 1.85; margin-bottom: 1.3rem; }
+.tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; }
+.tech-pill {
+  font-size: 0.76rem; font-weight: 500;
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--muted);
+  transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  cursor: default;
+}
+.tech-pill:hover { border-color: var(--acid); color: var(--acid); transform: translateY(-2px); }
+
+/* Values */
+#values { background: var(--black2); }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 4rem; }
+.value-card { background: var(--black); padding: 3rem 2.5rem; position: relative; overflow: hidden; transition: background 0.35s; }
+.value-card:hover { background: var(--card-bg); }
+.value-card::before { content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 0; background: var(--acid); transition: height 0.4s ease; }
+.value-card:hover::before { height: 100%; }
+.value-inner { transition: transform 0.35s ease; }
+.value-card:hover .value-inner { transform: translateX(6px); }
+.value-num { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: rgba(200,255,0,0.05); position: absolute; top: 1rem; right: 1.5rem; line-height: 1; pointer-events: none; }
+.value-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.75; margin-top: 0.5rem; }
+
+/* Stats row */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--border); border: 1px solid var(--border); margin-top: 4rem; }
+.stat-block-v { background: var(--black3); padding: 3rem 2.5rem; text-align: center; border-right: 1px solid var(--border); transition: background 0.3s; }
+.stat-block-v:last-child { border-right: none; }
+.stat-block-v:hover { background: var(--card-bg); }
+.stat-block-v .stat-num { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; color: var(--acid); }
+.stat-block-v .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem; display: block; }
+
+/* CTA Banner */
+.cta-banner { background: var(--acid); padding: 5rem 5rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
+.cta-banner h2 { color: var(--black); font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+.cta-banner p { color: rgba(0,0,0,0.55); font-size: 0.95rem; }
+
+@media (max-width: 1024px) {
+  .story-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .story-visual { height: 380px; }
+  .story-badge { left: 1rem; }
+  .values-grid { grid-template-columns: 1fr 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .cta-banner { grid-template-columns: 1fr; padding: 4rem 2.5rem; }
+}
+@media (max-width: 640px) {
+  .values-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>🇵🇰 Pakistan's boldest digital agency — turning ideas into enterprise-grade products</span>
+  <div class="top-bar-right">
+    <a href="contact.html">Free Strategy Call</a>
+    <a href="https://wa.me/923165743324" target="_blank">WhatsApp Us</a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Get a Quote →</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="team.html" onclick="toggleMenu()">Team</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--acid)">Contact →</a>
+</div>
+
+<div class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span>About</span>
+  </div>
+  <div class="page-hero-tag">About SalwaDev</div>
+  <h1>We're Not an Agency.<br><span class="accent">We're Partners.</span><br><span class="outline">We're Partners.</span></h1>
+  <p class="page-hero-sub">SalwaDev was built on one obsession: create digital work that genuinely moves businesses forward — not just looks good in a portfolio.</p>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Founded in Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Serving Globally <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">3+ Years of Craft <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">50+ Projects Delivered <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Enterprise Standards <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Built on Trust <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Founded in Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Serving Globally <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">3+ Years of Craft <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">50+ Projects Delivered <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Enterprise Standards <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Built on Trust <span class="marquee-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section style="background:var(--black);">
+  <div class="story-grid">
+    <div class="story-visual-wrap reveal">
+      <div class="story-visual">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80" alt="SalwaDev team working" class="story-img">
+        <div class="story-badge">
+          <span class="big">3+</span>
+          <span class="small">Years Building</span>
+        </div>
+      </div>
+    </div>
+    <div class="story-text reveal">
+      <div class="section-tag">Our Story</div>
+      <h2>Born in Pakistan.<br>Built for the <span class="accent">World.</span></h2>
+      <p>SalwaDev was founded in Rawalpindi with a clear mandate: bring world-class digital execution to businesses that deserve better. We saw too many companies settle for mediocre websites and templated solutions that didn't reflect their ambitions.</p>
+      <p>Three years and 50+ projects later, we're Pakistan's most results-focused digital agency — serving clients from local SMEs to global brands, with the same senior-level attention on every engagement.</p>
+      <p>We hire people obsessed with craft, we measure success by your metrics, and we build relationships that last beyond the launch date.</p>
+      <p style="color:var(--white);font-weight:500;">Founded and led by <strong>Farhan Ahmed (Founder &amp; CEO)</strong>, alongside <strong>Obaid Ullah (Co-CEO)</strong> and <strong>Zain Ul Abideen (CTO)</strong>, SalwaDev pairs hands-on engineering leadership with a relentless focus on client outcomes.</p>
+      <div class="tech-stack">
+        <span class="tech-pill">React</span><span class="tech-pill">Node.js</span><span class="tech-pill">WordPress</span>
+        <span class="tech-pill">Shopify</span><span class="tech-pill">Python</span><span class="tech-pill">AI / LLMs</span>
+        <span class="tech-pill">Figma</span><span class="tech-pill">Adobe CC</span><span class="tech-pill">Next.js</span>
+        <span class="tech-pill">MongoDB</span><span class="tech-pill">AWS</span><span class="tech-pill">Vercel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="background:var(--black2); padding:0;">
+  <div class="stats-row">
+    <div class="stat-block-v">
+      <span class="stat-num" data-count="50" data-suffix="+">50+</span>
+      <span class="stat-label">Projects Shipped</span>
+    </div>
+    <div class="stat-block-v">
+      <span class="stat-num" data-count="30" data-suffix="+">30+</span>
+      <span class="stat-label">Happy Clients</span>
+    </div>
+    <div class="stat-block-v">
+      <span class="stat-num" data-count="3" data-suffix="x">3x</span>
+      <span class="stat-label">Average ROI</span>
+    </div>
+    <div class="stat-block-v">
+      <span class="stat-num" data-count="3" data-suffix="+">3+</span>
+      <span class="stat-label">Years Building</span>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">Our Values</div>
+      <h2>The Principles That<br><span class="accent">Drive Our Work</span></h2>
+    </div>
+    <p>Every decision we make is guided by these core commitments — to our clients, to our craft, and to each other.</p>
+  </div>
+  <div class="values-grid reveal">
+    <div class="value-card stagger-child">
+      <div class="value-num">01</div>
+      <div class="value-inner">
+        <h3>Results Over Vanity</h3>
+        <p>We build for business outcomes — traffic, conversions, revenue — not just awards and aesthetics. Every design decision is backed by data and strategy.</p>
+      </div>
+    </div>
+    <div class="value-card stagger-child">
+      <div class="value-num">02</div>
+      <div class="value-inner">
+        <h3>Radical Transparency</h3>
+        <p>You'll always know where your project stands. Weekly updates, honest timelines, and no surprises at invoice time. Clarity is a service we provide.</p>
+      </div>
+    </div>
+    <div class="value-card stagger-child">
+      <div class="value-num">03</div>
+      <div class="value-inner">
+        <h3>Senior-Level Execution</h3>
+        <p>No juniors learning on your budget. Every project gets the attention of experienced engineers, designers, and strategists who've done this before.</p>
+      </div>
+    </div>
+    <div class="value-card stagger-child">
+      <div class="value-num">04</div>
+      <div class="value-inner">
+        <h3>Long-Term Partnership</h3>
+        <p>We're not a build-and-disappear agency. Post-launch support, growth optimisation, and ongoing iteration are part of every engagement.</p>
+      </div>
+    </div>
+    <div class="value-card stagger-child">
+      <div class="value-num">05</div>
+      <div class="value-inner">
+        <h3>Speed Without Shortcuts</h3>
+        <p>We move fast, but we don't cut corners. Our structured delivery process lets us ship quality work in record time — consistently.</p>
+      </div>
+    </div>
+    <div class="value-card stagger-child">
+      <div class="value-num">06</div>
+      <div class="value-inner">
+        <h3>Craft &amp; Obsession</h3>
+        <p>We genuinely care about how things look and feel. Good enough isn't in our vocabulary. We keep iterating until it's right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <div>
+    <h2>Want to Know More<br>About How We Work?</h2>
+    <p>Book a free 30-minute strategy call — let's talk about your project.</p>
+  </div>
+  <a href="contact.html" class="btn-dark">Start a Conversation &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-top-bar">
+    <span class="footer-top-bar-left">Serving clients across Pakistan and globally since 2022</span>
+    <div class="footer-top-bar-right">
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+      <p>Pakistan's boldest digital agency — enterprise websites, AI systems, and brand visuals that drive measurable business growth.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923165743324" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="mailto:farhan.riphah21@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Web Development</a></li><li><a href="services.html">UI/UX Design</a></li><li><a href="services.html">SEO Optimisation</a></li><li><a href="services.html">Shopify Stores</a></li><li><a href="services.html">AI Agents</a></li><li><a href="services.html">Graphic Design</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Careers</a></li><li><a href="blog.html">Blog</a></li></ul></div>
+    <div class="footer-col"><h4>Get in Touch</h4>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="https://wa.me/923165743324">+92 316 5743324</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:farhan.riphah21@gmail.com">farhan.riphah21@gmail.com</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rawalpindi, Pakistan</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 SalwaDev. All rights reserved.</span>
+    <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <span>Built with precision in Pakistan 🇵🇰</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/923165743324" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

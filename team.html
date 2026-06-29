@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){try{var t=localStorage.getItem('salwadev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — SalwaDev Digital Agency Pakistan</title>
+<meta name="description" content="Meet the core team at SalwaDev — the developers, designers, and strategists behind Pakistan's boldest digital agency.">
+<meta name="keywords" content="SalwaDev team, digital agency Pakistan team, web developer Pakistan, UI UX designer Pakistan, SEO specialist Pakistan">
+<link rel="canonical" href="https://salwadev.com/team.html">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* ── TEAM PAGE ── */
+.page-hero { position: relative; overflow: hidden; }
+
+/* 3-card team grid */
+.team-section { background: var(--black); }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+.team-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  aspect-ratio: 3/4;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  transition:
+    border-color 0.4s ease,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.5s ease;
+  cursor: default;
+  perspective: 800px;
+}
+.team-card:hover {
+  border-color: rgba(200,255,0,0.3);
+  transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,255,0,0.08);
+}
+
+.team-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s ease, filter 0.5s ease;
+  filter: grayscale(40%);
+  display: block;
+}
+.team-card:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+/* Gradient overlay */
+.team-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.95) 0%,
+    rgba(0,0,0,0.4)  45%,
+    rgba(0,0,0,0.05) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  transition: background 0.4s ease;
+}
+.team-card:hover .team-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.97) 0%,
+    rgba(0,0,0,0.6)  50%,
+    rgba(0,0,0,0.1)  100%
+  );
+}
+
+/* CEO badge */
+.ceo-badge {
+  position: absolute;
+  top: 1.2rem; left: 1.2rem;
+  background: var(--acid);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 2px;
+  z-index: 3;
+}
+
+/* Name & role */
+.team-name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.3rem;
+}
+.team-role {
+  font-size: 0.78rem;
+  color: var(--acid);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+.team-bio {
+  font-size: 0.82rem;
+  color: rgba(245,242,237,0.6);
+  line-height: 1.65;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    max-height 0.5s ease,
+    opacity    0.4s ease 0.1s,
+    transform  0.4s ease 0.1s;
+}
+.team-card:hover .team-bio {
+  max-height: 120px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Acid line sweep */
+.team-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--acid);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+  z-index: 3;
+}
+.team-card:hover::after { transform: scaleX(1); }
+
+/* Placeholder card (no photo) */
+.team-card .team-placeholder {
+  width: 100%; height: 100%;
+  background: var(--card-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.team-initials {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 700;
+  color: rgba(200,255,0,0.15);
+  letter-spacing: -0.03em;
+}
+
+/* Values / culture strip */
+.culture-strip {
+  background: var(--black2);
+  border-top: 1px solid var(--border);
+  padding: 5rem 4rem;
+}
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+.culture-card {
+  background: var(--black);
+  padding: 2.5rem 2rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.culture-card:hover { background: var(--card-bg); }
+.culture-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0;
+  height:2px; background:var(--acid);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.4s;
+}
+.culture-card:hover::after { transform:scaleX(1); }
+.culture-card h3 { margin-bottom: 0.6rem; }
+.culture-card p  { font-size: 0.86rem; color: var(--muted); line-height: 1.75; }
+
+@media (max-width: 900px) {
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .culture-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { aspect-ratio: 4/5; }
+  .culture-strip { padding: 4rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>🇵🇰 Pakistan's boldest digital agency — turning ideas into enterprise-grade products</span>
+  <div class="top-bar-right">
+    <a href="contact.html">Free Strategy Call</a>
+    <a href="https://wa.me/923165743324" target="_blank">WhatsApp Us</a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html" class="active">Team</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Get a Quote →</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="team.html" onclick="toggleMenu()">Team</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--acid)">Contact →</a>
+</div>
+<div class="breadcrumb" style="padding:8.5rem 5rem 0; position:relative; z-index:10;">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>Team</span>
+</div>
+
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-tag">The Team</div>
+  <h1>The Minds<br><span style="color:var(--acid)">Behind</span><br><span class="outline">the Magic</span></h1>
+  <p class="page-hero-sub">Three core specialists — a founder, a designer, and a developer — working in tight sync to ship digital work that actually performs.</p>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Farhan Ahmed — Founder &amp; CEO <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Obaid Ullah — Co-CEO <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Zain Ul Abideen — CTO <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Built in Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Serving Globally <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Farhan Ahmed — Founder &amp; CEO <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Obaid Ullah — Co-CEO <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Zain Ul Abideen — CTO <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Built in Pakistan <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Serving Globally <span class="marquee-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- TEAM CARDS — 3 ONLY -->
+<section class="team-section">
+  <div class="reveal">
+    <div class="section-tag">Core Team</div>
+    <h2>Three Specialists.<br><span class="accent">One Unified Vision.</span></h2>
+  </div>
+
+  <div class="team-grid reveal">
+
+    <!-- CEO -->
+    <div class="team-card ceo stagger-child">
+      <img src="assets/images/farhan.png" alt="Farhan Ahmed — Founder & CEO SalwaDev">
+      <div class="ceo-badge">Founder</div>
+      <div class="team-overlay">
+        <div class="team-name">Farhan Ahmed</div>
+        <div class="team-role">Founder &amp; CEO</div>
+        <p class="team-bio">The architect behind SalwaDev. Farhan leads strategy, client relationships, and full-stack development — with 3+ years of shipping products for Pakistan and global markets.</p>
+      </div>
+    </div>
+
+    <!-- Developer -->
+    <div class="team-card stagger-child">
+      <img src="assets/images/random.png" alt="Zain Ul Abideen — CTO SalwaDev">
+      <div class="team-placeholder">
+        <span class="team-initials">ZA</span>
+      </div>
+      <div class="team-overlay">
+        <div class="team-name">Zain Ul Abideen</div>
+        <div class="team-role">CTO &amp; Lead Engineer</div>
+        <p class="team-bio">As Chief Technology Officer, Zain owns SalwaDev's engineering direction — a Node.js, React and WordPress specialist who builds the technical backbone of every project: fast, scalable, and built to last.</p>
+      </div>
+    </div>
+
+    <!-- Designer -->
+    <div class="team-card stagger-child">
+      <img src="assets/images/random.png" alt="Obaid Ullah — Co-CEO SalwaDev">
+      <div class="team-placeholder">
+        <span class="team-initials">Obaid Ullah</span>
+      </div>
+      <div class="team-overlay">
+        <div class="team-name">Obaid Ullah</div>
+        <div class="team-role">Co-CEO</div>
+        <p class="team-bio">Strategic leader with a passion for innovation and growth. Obaid drives the vision and direction of SalwaDev, ensuring we deliver exceptional value to our clients.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CULTURE -->
+<div class="culture-strip">
+  <div class="reveal">
+    <div class="section-tag">How We Work</div>
+    <h2>A Small Team.<br><span class="accent">A Huge Advantage.</span></h2>
+  </div>
+  <div class="culture-grid reveal">
+    <div class="culture-card stagger-child">
+      <h3>No Account Managers</h3>
+      <p>You talk directly to the person doing the work. No telephone game, no translation errors, no delays. The developer you brief is the developer building your product.</p>
+    </div>
+    <div class="culture-card stagger-child">
+      <h3>Always in Your Time Zone</h3>
+      <p>Pakistan Standard Time — available Mon–Sat via WhatsApp. Rapid responses. We believe communication speed is part of the service.</p>
+    </div>
+    <div class="culture-card stagger-child">
+      <h3>Outcome Ownership</h3>
+      <p>Every team member understands the business goal behind each task — not just the deliverable. That context changes the quality of every decision made along the way.</p>
+    </div>
+  </div>
+</div>
+
+<!-- JOIN CTA -->
+<section style="background:var(--black); padding:5rem 4rem; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;">
+  <div class="reveal">
+    <div class="section-tag">Join the Team</div>
+    <h2>Think You<br>Belong <span class="accent">Here?</span></h2>
+    <p style="color:var(--muted); font-size:1rem; line-height:1.8; margin-bottom:2rem;">We're always open to exceptional developers, designers, and SEO strategists. If you're the best at what you do — and you're hungry to prove it — send us your portfolio.</p>
+    <a href="mailto:farhan.riphah21@gmail.com?subject=Join SalwaDev — Application" class="btn-primary">Send Your Portfolio &rarr;</a>
+  </div>
+  <div class="reveal" style="border:1px solid var(--border); border-radius:var(--radius); padding:3rem; background:var(--black2);">
+    <h3 style="margin-bottom:2rem;">We're Looking For</h3>
+    <ul style="list-style:none; display:flex; flex-direction:column; gap:1rem;">
+      <li style="display:flex; gap:1rem; align-items:flex-start; font-size:0.9rem; color:var(--muted);">
+        <span style="width:16px; height:1px; background:var(--acid); flex-shrink:0; margin-top:0.6rem;"></span>
+        Frontend / Full-Stack Developers (React, Node.js, WordPress)
+      </li>
+      <li style="display:flex; gap:1rem; align-items:flex-start; font-size:0.9rem; color:var(--muted);">
+        <span style="width:16px; height:1px; background:var(--acid); flex-shrink:0; margin-top:0.6rem;"></span>
+        UI/UX Designers with a strong Figma portfolio
+      </li>
+      <li style="display:flex; gap:1rem; align-items:flex-start; font-size:0.9rem; color:var(--muted);">
+        <span style="width:16px; height:1px; background:var(--acid); flex-shrink:0; margin-top:0.6rem;"></span>
+        Technical SEO specialists with proven ranking results
+      </li>
+      <li style="display:flex; gap:1rem; align-items:flex-start; font-size:0.9rem; color:var(--muted);">
+        <span style="width:16px; height:1px; background:var(--acid); flex-shrink:0; margin-top:0.6rem;"></span>
+        AI / Python developers interested in agent systems
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+
+
+<footer class="site-footer">
+  <div class="footer-top-bar">
+    <span class="footer-top-bar-left">Serving clients across Pakistan and globally since 2022</span>
+    <div class="footer-top-bar-right">
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+      <p>Pakistan's boldest digital agency — enterprise websites, AI systems, and brand visuals that drive measurable business growth.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923165743324" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="mailto:farhan.riphah21@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Web Development</a></li><li><a href="services.html">UI/UX Design</a></li><li><a href="services.html">SEO Optimisation</a></li><li><a href="services.html">Shopify Stores</a></li><li><a href="services.html">AI Agents</a></li><li><a href="services.html">Graphic Design</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Careers</a></li></ul></div>
+    <div class="footer-col"><h4>Get in Touch</h4>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="https://wa.me/923165743324">+92 316 5743324</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:farhan.riphah21@gmail.com">farhan.riphah21@gmail.com</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rawalpindi, Pakistan</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 SalwaDev. All rights reserved.</span>
+    <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <span>Built with precision in Pakistan 🇵🇰</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/923165743324" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+<div class="toast" id="toast"></div>
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

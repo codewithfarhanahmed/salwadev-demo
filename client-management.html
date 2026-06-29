@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Portal - SalwaDev</title>
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .portal-container {
+    min-height: 100vh;
+    padding: 8rem 2rem 2rem;
+    background: linear-gradient(135deg, var(--black) 0%, var(--black2) 100%);
+  }
+
+  .portal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .portal-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .portal-user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--card-bg);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--acid);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0a;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .user-role {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .logout-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .logout-btn:hover {
+    border-color: var(--acid);
+    color: var(--acid);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: var(--acid);
+    box-shadow: 0 0 20px rgba(200, 255, 0, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin: 0;
+    max-width: 70%;
+  }
+
+  .project-status {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(200, 255, 0, 0.1);
+    border: 1px solid rgba(200, 255, 0, 0.3);
+    color: var(--acid);
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: var(--radius);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-description {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .progress-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--black);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--acid) 0%, #a8dd00 100%);
+    width: 0%;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .requirements-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .requirements-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+    color: var(--white);
+  }
+
+  .requirements-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .requirements-list li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .requirements-list li::before {
+    content: '→';
+    color: var(--acid);
+    font-weight: bold;
+  }
+
+  .files-section {
+    margin-bottom: 1.5rem;
+  }
+
+  .file-upload-area {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(200, 255, 0, 0.02);
+  }
+
+  .file-upload-area:hover {
+    border-color: var(--acid);
+    background: rgba(200, 255, 0, 0.05);
+  }
+
+  .file-upload-area p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .file-upload-area strong {
+    color: var(--white);
+  }
+
+  #fileInput {
+    display: none;
+  }
+
+  .files-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--black);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+
+  .file-name {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--white);
+  }
+
+  .file-icon {
+    width: 20px;
+    height: 20px;
+    background: rgba(200, 255, 0, 0.1);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--acid);
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+
+  .file-size {
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .delete-btn {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  .delete-btn:hover {
+    text-decoration: underline;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+  }
+
+  .empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  .project-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .btn-sm {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    border-radius: var(--radius);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .btn-sm-primary {
+    background: var(--acid);
+    color: #0a0a0a;
+  }
+
+  .btn-sm-primary:hover {
+    background: var(--acid-hover);
+  }
+
+  .btn-sm-secondary {
+    background: var(--black);
+    color: var(--white);
+    border: 1px solid var(--border);
+  }
+
+  .btn-sm-secondary:hover {
+    border-color: var(--acid);
+    color: var(--acid);
+  }
+
+  .no-projects {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  .no-projects p {
+    color: var(--muted);
+    margin: 1rem 0;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .modal.show {
+    display: flex;
+  }
+
+  .modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .portal-container {
+      padding: 7rem 1rem 1rem;
+    }
+
+    .portal-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .portal-user-info {
+      width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Main Portal Content -->
+<div class="portal-container">
+  <!-- Header -->
+  <div class="portal-header">
+    <div>
+      <h1 id="portalTitle">Project Portal</h1>
+    </div>
+    <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+      <div class="portal-user-info">
+        <div class="user-avatar" id="userInitials"></div>
+        <div class="user-details">
+          <div class="user-name" id="userName"></div>
+          <div class="user-role" id="userCompany"></div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- Projects Grid -->
+  <div class="projects-grid" id="projectsGrid"></div>
+</div>
+
+<!-- File Upload Modal -->
+<div class="modal" id="fileUploadModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 style="margin: 0; font-size: 1.5rem;">Upload Files</h2>
+      <button class="modal-close" onclick="closeFileUploadModal()">✕</button>
+    </div>
+    <form onsubmit="handleFileUpload(event)">
+      <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+        <input type="file" id="fileInput" multiple>
+        <p><strong>Click to upload</strong> or drag and drop</p>
+        <p style="font-size: 0.8rem; margin-top: 0.5rem;">PNG, JPG, PDF, DOC up to 10MB</p>
+      </div>
+      <div id="filePreview" style="margin-top: 1rem;"></div>
+      <button type="submit" class="btn-sm btn-sm-primary" style="width: 100%; margin-top: 1.5rem;">
+        Upload Files
+      </button>
+    </form>
+  </div>
+</div>
+
+<input type="hidden" id="currentProjectId">
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+<script>
+  // Verify user is logged in
+  window.addEventListener('load', () => {
+    if (!Auth.isLoggedIn() || Auth.isAdmin()) {
+      window.location.href = 'login.html';
+    }
+    
+    initializePortal();
+  });
+
+  function initializePortal() {
+    const user = Auth.getCurrentUser();
+    
+    // Update user info
+    document.getElementById('userInitials').textContent = user.name.charAt(0).toUpperCase();
+    document.getElementById('userName').textContent = user.name;
+    document.getElementById('userCompany').textContent = user.company;
+    
+    // Load and display projects
+    displayProjects(user.projects || []);
+  }
+
+  function displayProjects(projects) {
+    const grid = document.getElementById('projectsGrid');
+    
+    if (!projects || projects.length === 0) {
+      grid.innerHTML = `
+        <div class="no-projects" style="grid-column: 1 / -1;">
+          <div style="font-size: 2rem;">📋</div>
+          <p><strong>No Active Projects</strong></p>
+          <p>Your admin will create projects here and notify you.</p>
+          <p style="font-size: 0.85rem; margin-top: 1rem;">Check back soon!</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = projects.map(project => `
+      <div class="project-card">
+        <div class="project-header">
+          <h3 class="project-name">${project.name}</h3>
+          <span class="project-status">${project.status}</span>
+        </div>
+        
+        ${project.description ? `
+          <p class="project-description">${project.description}</p>
+        ` : ''}
+
+        <!-- Progress -->
+        <div class="progress-section">
+          <div class="progress-label">
+            <span>Progress</span>
+            <span id="progress-${project.id}">${project.progress || 0}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${project.progress || 0}%"></div>
+          </div>
+        </div>
+
+        <!-- Requirements -->
+        ${project.requirements && project.requirements.length > 0 ? `
+          <div class="requirements-section">
+            <div class="requirements-title">📋 What We Need</div>
+            <ul class="requirements-list">
+              ${project.requirements.slice(0, 5).map(req => `
+                <li>${req.text}</li>
+              `).join('')}
+              ${project.requirements.length > 5 ? `<li><em>+ ${project.requirements.length - 5} more</em></li>` : ''}
+            </ul>
+          </div>
+        ` : ''}
+
+        <!-- Files Section -->
+        <div class="files-section">
+          <div class="requirements-title">📁 Your Files</div>
+          ${project.files && project.files.length > 0 ? `
+            <div class="files-list">
+              ${project.files.map(file => `
+                <div class="file-item">
+                  <div class="file-name">
+                    <div class="file-icon">${getFileExtension(file.name)}</div>
+                    <div>
+                      <div>${file.name}</div>
+                      <div class="file-size">${formatFileSize(file.size)}</div>
+                    </div>
+                  </div>
+                  <button type="button" class="delete-btn" onclick="deleteFile('${project.id}', '${file.id}')">✕</button>
+                </div>
+              `).join('')}
+            </div>
+          ` : `
+            <div class="empty-state" style="padding: 1rem;">
+              <p>No files uploaded yet</p>
+            </div>
+          `}
+        </div>
+
+        <!-- Actions -->
+        <div class="project-actions">
+          <button type="button" class="btn-sm btn-sm-primary" onclick="openFileUploadModal('${project.id}')">
+            📤 Upload Files
+          </button>
+          <button type="button" class="btn-sm btn-sm-secondary" onclick="refreshProjects()">
+            🔄 Refresh
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function getFileExtension(filename) {
+    const ext = filename.split('.').pop().toUpperCase().slice(0, 3);
+    return ext || 'F';
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  }
+
+  function openFileUploadModal(projectId) {
+    document.getElementById('currentProjectId').value = projectId;
+    document.getElementById('fileUploadModal').classList.add('show');
+    document.getElementById('filePreview').innerHTML = '';
+  }
+
+  function closeFileUploadModal() {
+    document.getElementById('fileUploadModal').classList.remove('show');
+    document.getElementById('fileInput').value = '';
+    document.getElementById('filePreview').innerHTML = '';
+  }
+
+  function handleFileUpload(e) {
+    e.preventDefault();
+    
+    const files = document.getElementById('fileInput').files;
+    const projectId = document.getElementById('currentProjectId').value;
+    const user = Auth.getCurrentUser();
+    
+    if (files.length === 0) {
+      showToast('Please select files to upload');
+      return;
+    }
+
+    let uploadedCount = 0;
+    
+    for (let file of files) {
+      if (file.size > 10 * 1024 * 1024) {
+        showToast('File ' + file.name + ' is too large (max 10MB)');
+        continue;
+      }
+
+      // Simulate file upload
+      const result = Auth.addFileToProject(projectId, file.name, file.size);
+      if (result.success) {
+        uploadedCount++;
+      }
+    }
+
+    if (uploadedCount > 0) {
+      showToast(`✓ ${uploadedCount} file(s) uploaded successfully`);
+      refreshProjects();
+      closeFileUploadModal();
+    }
+  }
+
+  function deleteFile(projectId, fileId) {
+    if (confirm('Delete this file?')) {
+      // Find and update project
+      const user = Auth.getCurrentUser();
+      const project = user.projects.find(p => p.id === projectId);
+      
+      if (project) {
+        project.files = project.files.filter(f => f.id !== fileId);
+        Auth.setCurrentUser(user);
+        showToast('File deleted');
+        refreshProjects();
+      }
+    }
+  }
+
+  function refreshProjects() {
+    const user = Auth.getCurrentUser();
+    displayProjects(user.projects || []);
+    showToast('Projects refreshed');
+  }
+
+  function handleLogout() {
+    if (confirm('Are you sure you want to logout?')) {
+      Auth.logoutUser();
+      window.location.href = 'login.html';
+    }
+  }
+
+  // Drag and drop file upload
+  const uploadArea = document.querySelector('.file-upload-area');
+  if (uploadArea) {
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = 'var(--acid)';
+      uploadArea.style.background = 'rgba(200, 255, 0, 0.1)';
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.style.borderColor = 'var(--border)';
+      uploadArea.style.background = 'rgba(200, 255, 0, 0.02)';
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = 'var(--border)';
+      uploadArea.style.background = 'rgba(200, 255, 0, 0.02)';
+      
+      document.getElementById('fileInput').files = e.dataTransfer.files;
+      
+      // Update preview
+      const preview = document.getElementById('filePreview');
+      preview.innerHTML = Array.from(e.dataTransfer.files).map(f => 
+        `<div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem;">✓ ${f.name}</div>`
+      ).join('');
+    });
+  }
+</script>
+
+</body>
+</html>

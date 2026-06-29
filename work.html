@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){try{var t=localStorage.getItem('salwadev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio & Work — SalwaDev Digital Agency Pakistan</title>
+<meta name="description" content="Explore SalwaDev's portfolio of web development, Shopify stores, AI agents, SEO campaigns, and graphic design projects delivered for clients across Pakistan and globally.">
+<meta name="keywords" content="SalwaDev portfolio, web design portfolio Pakistan, Shopify store examples, SEO case studies Pakistan, digital agency work Pakistan">
+<link rel="canonical" href="https://salwadev.com/work.html">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* ── WORK PAGE ── */
+.page-hero { position: relative; overflow: hidden; }
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.filter-btn {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: none;
+  color: var(--muted);
+  transition: all 0.25s ease;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  border-color: var(--acid);
+  color: var(--acid);
+  background: rgba(200,255,0,0.05);
+}
+
+/* Work grid */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.work-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  aspect-ratio: 4/3;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s;
+}
+.work-item:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  z-index: 2;
+}
+.work-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.5s ease;
+  filter: grayscale(20%);
+}
+.work-item:hover img { transform: scale(1.07); filter: grayscale(0%); }
+.work-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 1.8rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.work-item:hover .work-item-overlay { opacity: 1; }
+.work-item-cat {
+  font-size: 0.7rem;
+  color: var(--acid);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.work-item-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+.work-item-desc {
+  font-size: 0.82rem;
+  color: rgba(245,242,237,0.65);
+  line-height: 1.6;
+}
+.work-item.large { grid-column: span 2; }
+.work-item.tall  { aspect-ratio: 3/4; }
+
+/* Accent border on hover */
+.work-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--acid);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.work-item:hover::after { transform: scaleX(1); }
+
+/* Case study strip */
+.case-strip {
+  background: var(--black2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 5rem 4rem;
+}
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 3rem;
+}
+.case-card {
+  background: var(--black);
+  padding: 2.5rem 2rem;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.case-card:hover { background: var(--card-bg); }
+.case-card::after {
+  content:'';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--acid);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s;
+}
+.case-card:hover::after { transform: scaleX(1); }
+.case-result {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--acid);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.case-card h3 { margin-bottom: 0.5rem; }
+.case-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
+
+/* Filterable hide */
+.work-item.hidden {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .work-grid { grid-template-columns: 1fr 1fr; }
+  .work-item.large { grid-column: span 2; }
+  .case-grid { grid-template-columns: 1fr; }
+  .case-strip { padding: 4rem 2rem; }
+}
+@media (max-width: 640px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .work-item.large { grid-column: span 1; }
+  .work-item.tall { aspect-ratio: 4/3; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>🇵🇰 Pakistan's boldest digital agency — turning ideas into enterprise-grade products</span>
+  <div class="top-bar-right">
+    <a href="contact.html">Free Strategy Call</a>
+    <a href="https://wa.me/923165743324" target="_blank">WhatsApp Us</a>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="work.html" class="active">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Get a Quote →</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="team.html" onclick="toggleMenu()">Team</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--acid)">Contact →</a>
+</div>
+<div class="breadcrumb" style="padding:8.5rem 5rem 0; position:relative; z-index:10;">
+  <a href="index.html">Home</a>
+  <span class="breadcrumb-sep">›</span>
+  <span>Work</span>
+</div>
+
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-tag">Portfolio</div>
+  <h1>Selected<br><span style="color:var(--acid)">Work</span> &amp;<br><span class="outline">Results</span></h1>
+  <p class="page-hero-sub">Real projects, real clients, real outcomes. Every piece of work here exists to solve a specific business problem — and it does.</p>
+</div>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">E-Commerce <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Web Apps <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Brand Identity <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Systems <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Campaigns <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Billboard Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">E-Commerce <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Web Apps <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Brand Identity <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Systems <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Campaigns <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Billboard Design <span class="marquee-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<section style="background:var(--black);">
+  <div class="reveal" style="margin-bottom:3rem;">
+    <div class="section-tag">All Projects</div>
+    <h2>Projects That<br><span class="accent">Moved the Needle</span></h2>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" data-filter="all">All Work</button>
+    <button class="filter-btn" data-filter="web">Web Dev</button>
+    <button class="filter-btn" data-filter="ecom">E-Commerce</button>
+    <button class="filter-btn" data-filter="ai">AI</button>
+    <button class="filter-btn" data-filter="seo">SEO</button>
+    <button class="filter-btn" data-filter="design">Design</button>
+  </div>
+
+  <div class="work-grid reveal">
+
+    <div class="work-item large" data-cat="ecom">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" alt="Premium Fashion Shopify Store">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">Shopify / E-Commerce</div>
+        <div class="work-item-title">Premium Fashion Store Revamp</div>
+        <div class="work-item-desc">Complete Shopify rebuild with custom checkout flow — 68% uplift in conversion rate within 60 days of launch.</div>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="web">
+      <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&q=80" alt="FinTech Mobile App UI">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">UI/UX Design</div>
+        <div class="work-item-title">FinTech Mobile App</div>
+        <div class="work-item-desc">Full UI/UX design system for a Pakistan-based digital wallet app — Figma to production in 6 weeks.</div>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="ai">
+      <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80" alt="AI Customer Support Agent">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">AI Agent</div>
+        <div class="work-item-title">24/7 Customer Support Bot</div>
+        <div class="work-item-desc">WhatsApp AI agent handling 80% of tier-1 support queries — saving the client 40+ human hours per week.</div>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="seo">
+      <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80" alt="SEO organic growth">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">SEO Optimisation</div>
+        <div class="work-item-title">300% Organic Traffic Growth</div>
+        <div class="work-item-desc">12-month SEO campaign for a Pakistan e-commerce brand — from 8K to 32K monthly organic visitors.</div>
+      </div>
+    </div>
+
+    <div class="work-item large" data-cat="design">
+      <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=900&q=80" alt="Billboard Campaign Design">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">Billboard / Graphic Design</div>
+        <div class="work-item-title">National Brand Campaign Visuals</div>
+        <div class="work-item-desc">Full outdoor campaign for a national FMCG client — 20+ billboard formats across 5 cities, produced in 72 hours.</div>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="web">
+      <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&q=80" alt="SaaS web application">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">Web Development</div>
+        <div class="work-item-title">SaaS Dashboard Platform</div>
+        <div class="work-item-desc">Node.js + React SaaS dashboard for a UK-based logistics startup — built and shipped in 10 weeks.</div>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="ecom">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Shopify store">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">Shopify / E-Commerce</div>
+        <div class="work-item-title">Luxury Home Goods Store</div>
+        <div class="work-item-desc">Custom Shopify theme with AR product preview — 2× average order value post-launch.</div>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="ai">
+      <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80" alt="AI lead gen">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">AI Agent</div>
+        <div class="work-item-title">Automated Lead Qualification</div>
+        <div class="work-item-desc">GPT-4 powered WhatsApp bot pre-qualifying 200+ inbound leads per month for a real estate firm.</div>
+      </div>
+    </div>
+
+    <div class="work-item" data-cat="design">
+      <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&q=80" alt="Brand identity">
+      <div class="work-item-overlay">
+        <div class="work-item-cat">Brand Identity</div>
+        <div class="work-item-title">Tech Startup Visual Identity</div>
+        <div class="work-item-desc">Logo, brand system, pitch deck, and social templates for a Lahore-based SaaS startup's Series A raise.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CASE STUDY RESULTS -->
+<div class="case-strip">
+  <div class="reveal">
+    <div class="section-tag">By the Numbers</div>
+    <h2>Results We've<br><span class="accent">Actually Delivered</span></h2>
+  </div>
+  <div class="case-grid reveal">
+    <div class="case-card stagger-child">
+      <span class="case-result">+300%</span>
+      <h3>Organic Traffic Increase</h3>
+      <p>12-month SEO campaign for a Pakistan e-commerce brand — 8K to 32K monthly organic sessions, no paid ads.</p>
+    </div>
+    <div class="case-card stagger-child">
+      <span class="case-result">68%</span>
+      <h3>Conversion Rate Uplift</h3>
+      <p>Shopify redesign with checkout flow optimisation — same traffic, dramatically more revenue within 60 days.</p>
+    </div>
+    <div class="case-card stagger-child">
+      <span class="case-result">40h</span>
+      <h3>Weekly Hours Saved via AI</h3>
+      <p>WhatsApp AI support agent handling 80% of tier-1 queries autonomously, 24 hours a day, 7 days a week.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div style="background:var(--acid);padding:5rem 4rem;display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;">
+  <div>
+    <h2 style="color:var(--black);font-size:clamp(2rem,3.5vw,3rem);letter-spacing:-0.03em;margin-bottom:0.5rem;">Your Project<br>Belongs Here Next</h2>
+    <p style="color:rgba(0,0,0,0.6);font-size:1rem;">Let's add your name to the list of brands we've helped grow.</p>
+  </div>
+  <a href="contact.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:var(--black);color:var(--white);font-family:var(--font-display);font-weight:700;font-size:0.88rem;padding:1rem 2.2rem;border-radius:4px;text-decoration:none;white-space:nowrap;">Start a Project &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+
+
+
+<footer class="site-footer">
+  <div class="footer-top-bar">
+    <span class="footer-top-bar-left">Serving clients across Pakistan and globally since 2022</span>
+    <div class="footer-top-bar-right">
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+      <p>Pakistan's boldest digital agency — enterprise websites, AI systems, and brand visuals that drive measurable business growth.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923165743324" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+        <a href="mailto:farhan.riphah21@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Services</h4><ul><li><a href="services.html">Web Development</a></li><li><a href="services.html">UI/UX Design</a></li><li><a href="services.html">SEO Optimisation</a></li><li><a href="services.html">Shopify Stores</a></li><li><a href="services.html">AI Agents</a></li><li><a href="services.html">Graphic Design</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="about.html">About Us</a></li><li><a href="team.html">Our Team</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Careers</a></li></ul></div>
+    <div class="footer-col"><h4>Get in Touch</h4>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="https://wa.me/923165743324">+92 316 5743324</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:farhan.riphah21@gmail.com">farhan.riphah21@gmail.com</a></div>
+      <div class="footer-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Rawalpindi, Pakistan</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 SalwaDev. All rights reserved.</span>
+    <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+    <span>Built with precision in Pakistan 🇵🇰</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/923165743324" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

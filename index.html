@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(){try{var t=localStorage.getItem('salwadev-theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalwaDev — Enterprise Web Development, AI & Digital Agency Pakistan</title>
+<meta name="description" content="SalwaDev is Pakistan's leading digital agency — enterprise web development, AI agents, SEO, Shopify, UI/UX design driving real business growth.">
+<meta name="keywords" content="web development Pakistan, digital agency Pakistan, AI agents, SEO Pakistan, Shopify development, UI UX design, SalwaDev">
+<meta property="og:title" content="SalwaDev — Digital Agency Pakistan">
+<meta property="og:description" content="High-performance websites, AI systems, and brand visuals built for scale.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://salwadev.com/">
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+/* ── HOME-SPECIFIC ── */
+
+/* Hero */
+#home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-content { position: relative; z-index: 2; max-width: 1100px; }
+
+/* Hero eyebrow */
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-tag-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--black);
+  background: var(--acid);
+  padding: 0.35rem 1rem;
+  border-radius: 100px;
+}
+.hero-tag-sep { color: var(--border); font-size: 0.75rem; }
+.hero-tag-secondary {
+  font-size: 0.75rem; color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+h1.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 7.5vw, 7rem);
+  font-weight: 700;
+  line-height: 0.93;
+  letter-spacing: -0.035em;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
+}
+.line2 { color: var(--acid); display: block; }
+.outline { -webkit-text-stroke: 1.5px rgba(200,255,0,0.35); color: transparent; display: block; }
+
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted);
+  max-width: 520px; line-height: 1.8;
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
+}
+.hero-actions {
+  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.8s 0.65s forwards;
+}
+
+/* Trusted strip */
+.hero-trusted {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+}
+.hero-trusted-label {
+  font-size: 0.7rem; font-weight: 600; color: var(--muted);
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.hero-trusted-logos {
+  display: flex; gap: 2.5rem; align-items: center; flex-wrap: wrap;
+}
+.trust-pill {
+  font-family: var(--font-display);
+  font-size: 0.78rem; font-weight: 700;
+  color: rgba(255,255,255,0.18);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.trust-pill:hover { color: rgba(200,255,0,0.4); }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── Stats strip (right after hero) ── */
+.stats-strip {
+  background: var(--black3);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-block {
+  padding: 2.5rem 3rem;
+  border-right: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.stat-block:last-child { border-right: none; }
+.stat-block:hover { background: var(--card-bg); }
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.8rem; font-weight: 700;
+  color: var(--acid); display: block; line-height: 1;
+}
+.stat-label {
+  font-size: 0.75rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-top: 0.5rem; display: block;
+}
+
+/* ── Services Preview ── */
+#services-preview { background: var(--black2); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.service-card {
+  background: var(--black);
+  padding: 3rem 2.5rem;
+  position: relative; overflow: hidden;
+  transition: background 0.3s;
+  cursor: default;
+}
+.service-card:hover { background: var(--card-bg); }
+.service-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--acid);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.service-card:hover::after { transform: scaleX(1); }
+.service-icon {
+  width: 48px; height: 48px;
+  border: 1px solid rgba(200,255,0,0.2);
+  border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.8rem;
+  transition: border-color 0.3s, background 0.3s;
+}
+.service-card:hover .service-icon { border-color: var(--acid); background: rgba(200,255,0,0.07); }
+.service-icon svg { width: 22px; height: 22px; stroke: var(--acid); fill: none; stroke-width: 1.5; }
+.service-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.8; margin-top: 0.6rem; }
+.service-num {
+  position: absolute; top: 1.5rem; right: 1.8rem;
+  font-family: var(--font-display); font-size: 0.65rem; font-weight: 700;
+  color: rgba(255,255,255,0.06); letter-spacing: 0.08em;
+}
+.service-card-link {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.78rem; font-weight: 600;
+  color: var(--acid); text-decoration: none;
+  margin-top: 1.5rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  opacity: 0; transform: translateX(-8px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.service-card:hover .service-card-link { opacity: 1; transform: translateX(0); }
+
+/* ── Capabilities / Process ── */
+#process { background: var(--black); }
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  margin-top: 4rem;
+}
+.process-step {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--border);
+  position: relative;
+  transition: background 0.3s;
+}
+.process-step:last-child { border-right: none; }
+.process-step:hover { background: var(--card-bg); }
+.process-step-num {
+  font-family: var(--font-display); font-size: 0.7rem; font-weight: 700;
+  color: var(--acid); letter-spacing: 0.18em;
+  margin-bottom: 1.5rem; display: block;
+}
+.process-step h3 { font-size: 1rem; margin-bottom: 0.6rem; }
+.process-step p { font-size: 0.84rem; color: var(--muted); line-height: 1.75; }
+.process-step::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: var(--acid);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.process-step:hover::before { transform: scaleX(1); }
+
+/* ── Why Us ── */
+#why { background: var(--black2); }
+.why-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 4rem;
+}
+.why-card {
+  background: var(--black);
+  padding: 3rem 2rem;
+  transition: background 0.3s;
+}
+.why-card:hover { background: var(--card-bg); }
+.why-card .why-num {
+  font-family: var(--font-display);
+  font-size: 2.8rem; font-weight: 700;
+  color: var(--acid); line-height: 1; margin-bottom: 0.75rem;
+}
+.why-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.75; margin-top: 0.4rem; }
+
+/* ── Industries ── */
+#industries { background: var(--black); }
+.industries-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-top: 4rem;
+}
+.industry-card {
+  background: var(--black);
+  padding: 2.5rem;
+  display: flex; align-items: flex-start; gap: 1.5rem;
+  transition: background 0.3s;
+}
+.industry-card:hover { background: var(--card-bg); }
+.industry-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--acid); flex-shrink: 0; margin-top: 6px;
+}
+.industry-card h3 { font-size: 0.96rem; margin-bottom: 0.35rem; }
+.industry-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+/* ── Testimonial ── */
+#testimonials { background: var(--black2); }
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 4rem;
+}
+.testimonial-card {
+  background: var(--black3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  transition: border-color 0.3s, transform 0.3s;
+}
+.testimonial-card:hover { border-color: rgba(200,255,0,0.2); transform: translateY(-4px); }
+.testimonial-stars { color: var(--acid); font-size: 0.85rem; margin-bottom: 1.2rem; }
+.testimonial-card p { font-size: 0.9rem; color: rgba(245,242,237,0.75); line-height: 1.8; margin-bottom: 1.8rem; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 0.9rem; }
+.author-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(200,255,0,0.12);
+  border: 1px solid rgba(200,255,0,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 0.85rem; color: var(--acid);
+  flex-shrink: 0;
+}
+.author-name { font-size: 0.88rem; font-weight: 600; }
+.author-role { font-size: 0.75rem; color: var(--muted); }
+
+/* ── CTA Banner ── */
+.cta-banner {
+  background: var(--acid);
+  padding: 5.5rem 5rem;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 3rem; align-items: center;
+}
+.cta-banner h2 {
+  color: var(--black);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.6rem;
+}
+.cta-banner p { color: rgba(0,0,0,0.55); font-size: 0.95rem; }
+.cta-banner-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  #home { padding: 7rem 2.5rem 4rem; }
+  .stats-strip { grid-template-columns: 1fr 1fr; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .industries-grid { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .cta-banner { grid-template-columns: 1fr; padding: 4rem 2.5rem; }
+  .cta-banner-actions { align-items: flex-start; flex-direction: row; }
+}
+@media (max-width: 640px) {
+  .stats-strip { grid-template-columns: 1fr 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .industries-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span>🇵🇰 Pakistan's boldest digital agency — turning ideas into enterprise-grade products</span>
+  <div class="top-bar-right">
+    <a href="contact.html">Free Strategy Call</a>
+    <a href="https://wa.me/923165743324" target="_blank">WhatsApp Us</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="work.html">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="team.html">Team</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <a href="contact.html" class="nav-cta">Get a Quote →</a>
+    <a href="client-management.html" class="nav-btn" style="background: var(--acid); color: #0a0a0a; padding: 0 1.5rem; text-decoration: none;">📋 Client Portal</a>
+    <a href="login.html" class="nav-btn" style="border: 1px solid var(--acid); color: var(--acid); padding: 0 1.5rem; text-decoration: none;">🔐 Login</a>
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="services.html" onclick="toggleMenu()">Services</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="portfolio.html" onclick="toggleMenu()">Portfolio</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="team.html" onclick="toggleMenu()">Team</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--acid)">Contact →</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-tag-pill">Digital Agency</span>
+      <span class="hero-tag-sep">|</span>
+      <span class="hero-tag-secondary">Pakistan &rarr; Global</span>
+    </div>
+    <h1 class="hero-h1">
+      We Build<br>
+      <span class="line2">Digital</span>
+      <span class="outline">Futures.</span>
+    </h1>
+    <p class="hero-sub">SalwaDev delivers enterprise-grade web platforms, autonomous AI systems, and conversion-optimised digital experiences — engineered for scale, built to perform.</p>
+    <div class="hero-actions">
+      <a href="services.html" class="btn-primary">Explore Services &rarr;</a>
+      <a href="work.html" class="btn-ghost">View Our Work</a>
+      <a href="contact.html" class="btn-ghost">Free Consultation</a>
+    </div>
+    <div class="hero-trusted">
+      <p class="hero-trusted-label">Trusted by businesses across industries</p>
+      <div class="hero-trusted-logos">
+        <span class="trust-pill">E-Commerce</span>
+        <span class="trust-pill">Healthcare</span>
+        <span class="trust-pill">Real Estate</span>
+        <span class="trust-pill">Retail</span>
+        <span class="trust-pill">SaaS</span>
+        <span class="trust-pill">Hospitality</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-block">
+    <span class="stat-num" data-count="50" data-suffix="+">50+</span>
+    <span class="stat-label">Projects Delivered</span>
+  </div>
+  <div class="stat-block">
+    <span class="stat-num" data-count="30" data-suffix="+">30+</span>
+    <span class="stat-label">Happy Clients</span>
+  </div>
+  <div class="stat-block">
+    <span class="stat-num" data-count="3" data-suffix="x">3x</span>
+    <span class="stat-label">Average ROI</span>
+  </div>
+  <div class="stat-block">
+    <span class="stat-num" data-count="3" data-suffix="+">3+</span>
+    <span class="stat-label">Years of Excellence</span>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Web Development <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Shopify Stores <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Agents <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Optimization <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Graphic Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Billboard Banners <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Node.js &amp; WordPress <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Web Development <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">UI/UX Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Shopify Stores <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">AI Agents <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">SEO Optimization <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Graphic Design <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Billboard Banners <span class="marquee-dot">&#10022;</span></span>
+    <span class="marquee-item">Node.js &amp; WordPress <span class="marquee-dot">&#10022;</span></span>
+  </div>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<section id="services-preview">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">Our Capabilities</div>
+      <h2>Six Ways We Accelerate<br>Your <span class="accent">Business Growth</span></h2>
+    </div>
+    <div>
+      <p>From pixel-perfect interfaces to autonomous AI systems — every solution is engineered for performance and built to outperform.</p>
+      <a href="services.html" class="btn-ghost" style="margin-top:1.5rem; display:inline-flex;">All Services &rarr;</a>
+    </div>
+  </div>
+
+  <div class="services-grid reveal">
+    <div class="service-card stagger-child">
+      <div class="service-num">01</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      </div>
+      <h3>Web Development</h3>
+      <p>Enterprise-grade, blazing-fast websites and apps using Node.js, React, and WordPress — from landing pages to full-stack platforms that scale under pressure.</p>
+      <a href="services.html" class="service-card-link">Learn More &rarr;</a>
+    </div>
+
+    <div class="service-card stagger-child">
+      <div class="service-num">02</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+      </div>
+      <h3>UI/UX Design</h3>
+      <p>Research-backed, pixel-precise interfaces that reduce friction and drive conversions — across every touchpoint and every device.</p>
+      <a href="services.html" class="service-card-link">Learn More &rarr;</a>
+    </div>
+
+    <div class="service-card stagger-child">
+      <div class="service-num">03</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h3>SEO Optimization</h3>
+      <p>Dominate search rankings with technical SEO, content strategy, and on-page optimisation that compounds organic growth over time.</p>
+      <a href="services.html" class="service-card-link">Learn More &rarr;</a>
+    </div>
+
+    <div class="service-card stagger-child">
+      <div class="service-num">04</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </div>
+      <h3>Shopify Stores</h3>
+      <p>Custom storefronts built to convert — theme development, product pages, checkout optimisation, and app integrations that scale your e-commerce revenue.</p>
+      <a href="services.html" class="service-card-link">Learn More &rarr;</a>
+    </div>
+
+    <div class="service-card stagger-child">
+      <div class="service-num">05</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      </div>
+      <h3>AI Agents</h3>
+      <p>Intelligent automation that works around the clock — custom AI agents for customer support, lead generation, content workflows, and business processes.</p>
+      <a href="services.html" class="service-card-link">Learn More &rarr;</a>
+    </div>
+
+    <div class="service-card stagger-child">
+      <div class="service-num">06</div>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="14.5" r="2.5"/><circle cx="8.5" cy="14.5" r="2.5"/><line x1="13.5" y1="9" x2="13.5" y2="12"/><line x1="11.5" y1="13" x2="9.5" y2="13"/><line x1="15.5" y1="13" x2="17.5" y2="13"/></svg>
+      </div>
+      <h3>Graphic &amp; Billboard Design</h3>
+      <p>Bold brand visuals from social media to massive outdoor billboards — designed for impact at every format, every scale.</p>
+      <a href="services.html" class="service-card-link">Learn More &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">How We Work</div>
+      <h2>Our Proven<br><span class="accent">Delivery Process</span></h2>
+    </div>
+    <p>A structured, transparent workflow that keeps you in control and on schedule — every time.</p>
+  </div>
+  <div class="process-steps reveal">
+    <div class="process-step stagger-child">
+      <span class="process-step-num">Step 01</span>
+      <h3>Discovery & Strategy</h3>
+      <p>We start with a deep-dive into your business goals, audience, and competitors. From there we map a clear, actionable strategy before writing a single line of code.</p>
+    </div>
+    <div class="process-step stagger-child">
+      <span class="process-step-num">Step 02</span>
+      <h3>Design & Prototype</h3>
+      <p>Wireframes and high-fidelity prototypes that you can click through before development. Rapid iterations until it's exactly right.</p>
+    </div>
+    <div class="process-step stagger-child">
+      <span class="process-step-num">Step 03</span>
+      <h3>Build & Test</h3>
+      <p>Senior-level engineering with continuous integration and QA at every stage. No surprise bugs in production, no scope creep.</p>
+    </div>
+    <div class="process-step stagger-child">
+      <span class="process-step-num">Step 04</span>
+      <h3>Launch & Grow</h3>
+      <p>Smooth handover, training, and ongoing optimisation. We don't disappear after go-live — we track, iterate, and grow with you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SALWADEV -->
+<section id="why">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">Why SalwaDev</div>
+      <h2>The SalwaDev<br><span class="accent">Advantage</span></h2>
+    </div>
+    <p>We're not an agency that disappears after delivery. We're a growth partner invested in your long-term success.</p>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-card stagger-child">
+      <div class="why-num">50+</div>
+      <h3>Projects Delivered</h3>
+      <p>Every project is handled with senior-level attention. No juniors learning on your budget.</p>
+    </div>
+    <div class="why-card stagger-child">
+      <div class="why-num">48h</div>
+      <h3>Rapid Prototypes</h3>
+      <p>From brief to working prototype in 48 hours. We move fast without sacrificing quality.</p>
+    </div>
+    <div class="why-card stagger-child">
+      <div class="why-num">3x</div>
+      <h3>Average ROI</h3>
+      <p>Clients report an average 3x return on their digital investment within the first year.</p>
+    </div>
+    <div class="why-card stagger-child">
+      <div class="why-num">24/7</div>
+      <h3>Support Access</h3>
+      <p>WhatsApp-first communication. Real humans. No ticket queues, no auto-replies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">Industries Served</div>
+      <h2>We Work Across<br><span class="accent">Every Sector</span></h2>
+    </div>
+    <p>Domain expertise across verticals means we understand your business context — not just your tech stack.</p>
+  </div>
+  <div class="industries-grid reveal">
+    <div class="industry-card stagger-child">
+      <div class="industry-dot"></div>
+      <div>
+        <h3>E-Commerce &amp; Retail</h3>
+        <p>Shopify stores, custom carts, and conversion-optimised product experiences that drive revenue.</p>
+      </div>
+    </div>
+    <div class="industry-card stagger-child">
+      <div class="industry-dot"></div>
+      <div>
+        <h3>Healthcare &amp; Pharma</h3>
+        <p>HIPAA-aware web platforms, patient portals, and appointment systems built for regulated industries.</p>
+      </div>
+    </div>
+    <div class="industry-card stagger-child">
+      <div class="industry-dot"></div>
+      <div>
+        <h3>Real Estate</h3>
+        <p>Property listing portals, virtual tour integrations, and CRM-connected lead funnels for property firms.</p>
+      </div>
+    </div>
+    <div class="industry-card stagger-child">
+      <div class="industry-dot"></div>
+      <div>
+        <h3>SaaS &amp; Technology</h3>
+        <p>Marketing sites, onboarding flows, and growth-focused dashboards for software companies.</p>
+      </div>
+    </div>
+    <div class="industry-card stagger-child">
+      <div class="industry-dot"></div>
+      <div>
+        <h3>Hospitality &amp; Food</h3>
+        <p>Restaurant websites, booking engines, and loyalty apps for hospitality brands of every size.</p>
+      </div>
+    </div>
+    <div class="industry-card stagger-child">
+      <div class="industry-dot"></div>
+      <div>
+        <h3>Education &amp; Training</h3>
+        <p>LMS integrations, course portals, and student engagement platforms for EdTech organisations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">Client Testimonials</div>
+      <h2>What Our Clients<br><span class="accent">Say About Us</span></h2>
+    </div>
+    <a href="work.html" class="btn-ghost">View Portfolio &rarr;</a>
+  </div>
+  <div class="testimonials-grid reveal">
+    <div class="testimonial-card stagger-child">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"SalwaDev rebuilt our entire e-commerce presence in under six weeks. The attention to performance and SEO was exceptional — our organic traffic doubled within three months."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AK</div>
+        <div>
+          <div class="author-name">Ahmed K.</div>
+          <div class="author-role">Founder, RetailPK</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card stagger-child">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"The AI chatbot they built for us handles 80% of customer queries automatically. The team understood our industry context and delivered beyond our expectations."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SR</div>
+        <div>
+          <div class="author-name">Sara R.</div>
+          <div class="author-role">CTO, HealthStart</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card stagger-child">
+      <div class="testimonial-stars">★★★★★</div>
+      <p>"Professional, fast, and genuinely invested in results. Our Shopify store conversion rate went from 1.2% to 3.8% after their UX overhaul. Incredible ROI."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MH</div>
+        <div>
+          <div class="author-name">M. Hassan</div>
+          <div class="author-role">CEO, FashionForward</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section id="leadership" style="background:var(--black);">
+  <div class="section-header reveal">
+    <div class="section-header-left">
+      <div class="section-tag">Leadership</div>
+      <h2>Led By Founders Who<br><span class="accent">Still Ship Code</span></h2>
+    </div>
+    <p>SalwaDev is founder-led from day one — strategy, engineering, and delivery driven by the people whose names are on the door.</p>
+  </div>
+  <div class="why-grid reveal" style="grid-template-columns:repeat(3,1fr);">
+    <div class="why-card stagger-child">
+      <h3>Farhan Ahmed</h3>
+      <p style="color:var(--acid);font-weight:600;margin-bottom:0.6rem;">Founder &amp; CEO</p>
+      <p>Sets SalwaDev's vision and owns client strategy and full-stack delivery. The founder and CEO behind every engagement, from Rawalpindi to global markets.</p>
+    </div>
+    <div class="why-card stagger-child">
+      <h3>Obaid Ullah</h3>
+      <p style="color:var(--acid);font-weight:600;margin-bottom:0.6rem;">Co-CEO</p>
+      <p>Drives growth, operations, and partnerships — making sure every client relationship delivers measurable, lasting value.</p>
+    </div>
+    <div class="why-card stagger-child">
+      <h3>Zain Ul Abideen</h3>
+      <p style="color:var(--acid);font-weight:600;margin-bottom:0.6rem;">CTO</p>
+      <p>Owns engineering direction and technical quality across React, Node.js, and WordPress — building products that scale.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div>
+    <h2>Ready to Build Something<br>That Actually Moves the Needle?</h2>
+    <p>Book a free 30-minute strategy call — no commitments, just clarity on your next step.</p>
+  </div>
+  <div class="cta-banner-actions">
+    <a href="contact.html" class="btn-dark">Start a Project &rarr;</a>
+    <a href="https://wa.me/923165743324" target="_blank" class="btn-dark" style="background:#25d366">WhatsApp Us</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-top-bar">
+    <span class="footer-top-bar-left">Serving clients across Pakistan and globally since 2022</span>
+    <div class="footer-top-bar-right">
+      <a href="about.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+  <div class="footer-main">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+      <p>Pakistan's boldest digital agency — enterprise websites, AI systems, and brand visuals that drive measurable business growth.</p>
+      <div class="footer-socials">
+        <a href="https://wa.me/923165743324" aria-label="WhatsApp" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </a>
+        <a href="mailto:farhan.riphah21@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Web Development</a></li>
+        <li><a href="services.html">UI/UX Design</a></li>
+        <li><a href="services.html">SEO Optimisation</a></li>
+        <li><a href="services.html">Shopify Stores</a></li>
+        <li><a href="services.html">AI Agents</a></li>
+        <li><a href="services.html">Graphic Design</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Careers</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.1 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0016.09 17.9l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="https://wa.me/923165743324">+92 316 5743324</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:farhan.riphah21@gmail.com">farhan.riphah21@gmail.com</a>
+      </div>
+      <div class="footer-contact-item">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Rawalpindi, Pakistan</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 SalwaDev. All rights reserved.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+    <span>Built with precision in Pakistan 🇵🇰</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/923165743324" class="wa-float" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+
+</body>
+</html>

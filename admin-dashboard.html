@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - SalwaDev</title>
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .admin-container {
+    min-height: 100vh;
+    padding: 8rem 2rem 2rem;
+    background: linear-gradient(135deg, var(--black) 0%, var(--black2) 100%);
+  }
+
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .admin-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .admin-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+  }
+
+  .admin-tab {
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .admin-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--acid);
+    transform: scaleX(0);
+    transition: transform 0.25s ease;
+  }
+
+  .admin-tab:hover {
+    color: var(--white);
+  }
+
+  .admin-tab.active {
+    color: var(--white);
+  }
+
+  .admin-tab.active::after {
+    transform: scaleX(1);
+  }
+
+  .tab-content {
+    display: none;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .clients-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .clients-table thead {
+    background: var(--black);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .clients-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--white);
+  }
+
+  .clients-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border2);
+    font-size: 0.9rem;
+  }
+
+  .clients-table tbody tr:hover {
+    background: var(--black);
+  }
+
+  .client-name {
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .client-badge {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    background: rgba(200, 255, 0, 0.1);
+    border: 1px solid rgba(200, 255, 0, 0.3);
+    color: var(--acid);
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: var(--radius);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .action-btn {
+    padding: 0.5rem 1rem;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--white);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .action-btn:hover {
+    border-color: var(--acid);
+    color: var(--acid);
+  }
+
+  .projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .client-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+
+  .client-card:hover {
+    border-color: var(--acid);
+  }
+
+  .client-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+  }
+
+  .client-info h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+  }
+
+  .client-info p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .projects-in-card {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .projects-in-card h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .project-list-item {
+    padding: 0.5rem;
+    background: var(--black);
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .project-list-item:hover {
+    background: rgba(200, 255, 0, 0.1);
+    border-left: 2px solid var(--acid);
+    padding-left: calc(0.5rem - 2px);
+  }
+
+  .project-list-item .progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .progress-mini {
+    width: 50px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-mini-fill {
+    height: 100%;
+    background: var(--acid);
+  }
+
+  .form-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    max-width: 600px;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--acid);
+    box-shadow: 0 0 0 3px rgba(200, 255, 0, 0.1);
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .btn-submit {
+    flex: 1;
+    padding: 1rem;
+    background: var(--acid);
+    color: #0a0a0a;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .btn-submit:hover {
+    background: var(--acid-hover);
+    transform: translateY(-2px);
+  }
+
+  .btn-cancel {
+    flex: 1;
+    padding: 1rem;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--border);
+    font-weight: 700;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-cancel:hover {
+    border-color: var(--acid);
+    color: var(--acid);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+
+  .stat-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+  }
+
+  .stat-card .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--acid);
+    margin: 0.5rem 0;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .modal.show {
+    display: flex;
+  }
+
+  .modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal-close {
+    float: right;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  .modal-close:hover {
+    color: var(--acid);
+  }
+
+  .requirement-input {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .requirement-input input {
+    flex: 1;
+  }
+
+  .requirement-input button {
+    padding: 0.9rem 1rem;
+    background: var(--acid);
+    color: #0a0a0a;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .requirements-display {
+    list-style: none;
+    margin-top: 1rem;
+  }
+
+  .requirements-display li {
+    padding: 0.75rem;
+    background: var(--black);
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logout-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.2s;
+  }
+
+  .logout-btn:hover {
+    border-color: var(--acid);
+    color: var(--acid);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--muted);
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  @media (max-width: 768px) {
+    .admin-container {
+      padding: 7rem 1rem 1rem;
+    }
+
+    .admin-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .clients-table {
+      font-size: 0.8rem;
+    }
+
+    .clients-table th,
+    .clients-table td {
+      padding: 0.75rem;
+    }
+
+    .projects-container {
+      grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <button class="logout-btn" onclick="handleAdminLogout()">Logout</button>
+  </div>
+</nav>
+
+<!-- Admin Container -->
+<div class="admin-container">
+  <!-- Header -->
+  <div class="admin-header">
+    <h1>👨‍💼 Admin Dashboard</h1>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>Total Clients</h3>
+      <div class="number" id="totalClients">0</div>
+    </div>
+    <div class="stat-card">
+      <h3>Active Projects</h3>
+      <div class="number" id="activeProjects">0</div>
+    </div>
+    <div class="stat-card">
+      <h3>Completed</h3>
+      <div class="number" id="completedProjects">0</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="admin-tabs">
+    <button class="admin-tab active" onclick="switchTab('clients')">👥 Clients</button>
+    <button class="admin-tab" onclick="switchTab('projects')">📋 Projects</button>
+    <button class="admin-tab" onclick="switchTab('create')">➕ Create Project</button>
+  </div>
+
+  <!-- Tab: Clients -->
+  <div id="clients" class="tab-content active">
+    <table class="clients-table">
+      <thead>
+        <tr>
+          <th>Client Name</th>
+          <th>Company</th>
+          <th>Email</th>
+          <th>Projects</th>
+          <th>Joined</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="clientsTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Tab: Projects -->
+  <div id="projects" class="tab-content">
+    <div class="projects-container" id="projectsContainer"></div>
+  </div>
+
+  <!-- Tab: Create Project -->
+  <div id="create" class="tab-content">
+    <div class="form-container">
+      <h2>Create New Project</h2>
+      <form onsubmit="handleCreateProject(event)">
+        <div class="form-group">
+          <label for="projectClient">Select Client</label>
+          <select id="projectClient" required>
+            <option value="">-- Choose a client --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input type="text" id="projectName" placeholder="e.g., E-commerce Platform" required>
+        </div>
+
+        <div class="form-group">
+          <label for="projectDesc">Description</label>
+          <textarea id="projectDesc" placeholder="Project details and scope..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">Create Project</button>
+          <button type="reset" class="btn-cancel">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Project Management Modal -->
+<div class="modal" id="projectModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeProjectModal()">✕</button>
+    <h2 id="projectModalTitle" style="margin-top: 0;">Manage Project</h2>
+    
+    <div class="form-group">
+      <label>Project Name</label>
+      <input type="text" id="modalProjectName" readonly style="background: var(--muted2); cursor: not-allowed;">
+    </div>
+
+    <div class="form-group">
+      <label for="projectProgress">Progress (%)</label>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <input type="range" id="projectProgress" min="0" max="100" value="0" style="flex: 1; height: 6px;">
+        <span id="progressValue" style="min-width: 50px; text-align: right;">0%</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="projectStatus">Status</label>
+      <select id="projectStatus">
+        <option value="pending">Pending</option>
+        <option value="active">Active</option>
+        <option value="completed">Completed</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Add Requirement</label>
+      <div class="requirement-input">
+        <input type="text" id="newRequirement" placeholder="What do you need from the client?">
+        <button type="button" onclick="addRequirement()">Add</button>
+      </div>
+      <ul class="requirements-display" id="requirementsList"></ul>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn-submit" onclick="saveProjectChanges()">Save Changes</button>
+      <button class="btn-cancel" onclick="closeProjectModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+<script>
+  let currentEditingProject = null;
+  let currentEditingClient = null;
+
+  // Verify user is admin
+  window.addEventListener('load', () => {
+    if (!Auth.isLoggedIn() || !Auth.isAdmin()) {
+      window.location.href = 'login.html';
+    }
+    
+    initializeDashboard();
+  });
+
+  function initializeDashboard() {
+    loadStats();
+    loadClients();
+    loadProjects();
+    loadClientSelect();
+  }
+
+  function loadStats() {
+    const clients = Auth.getAllClients();
+    const allProjects = clients.reduce((acc, client) => {
+      return acc.concat(client.projects || []);
+    }, []);
+
+    document.getElementById('totalClients').textContent = clients.length;
+    document.getElementById('activeProjects').textContent = allProjects.filter(p => p.status === 'active').length;
+    document.getElementById('completedProjects').textContent = allProjects.filter(p => p.status === 'completed').length;
+  }
+
+  function loadClients() {
+    const clients = Auth.getAllClients();
+    const tbody = document.getElementById('clientsTableBody');
+
+    if (clients.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--muted);">No clients yet</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = clients.map(client => `
+      <tr>
+        <td><span class="client-name">${client.name}</span></td>
+        <td>${client.company}</td>
+        <td>${client.email}</td>
+        <td><span class="client-badge">${(client.projects || []).length} projects</span></td>
+        <td>${new Date(client.createdAt).toLocaleDateString()}</td>
+        <td>
+          <div class="action-buttons">
+            <button class="action-btn" onclick="manageClient('${client.id}')">Manage</button>
+            <button class="action-btn" onclick="deleteClient('${client.id}')" style="color: #ff6b6b;">Delete</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function loadProjects() {
+    const clients = Auth.getAllClients();
+    const container = document.getElementById('projectsContainer');
+
+    if (clients.length === 0) {
+      container.innerHTML = '<div class="empty-state" style="grid-column: 1 / -1;">No clients or projects yet</div>';
+      return;
+    }
+
+    container.innerHTML = clients.map(client => {
+      const projects = client.projects || [];
+      return `
+        <div class="client-card">
+          <div class="client-header">
+            <div class="client-info">
+              <h3>${client.name}</h3>
+              <p>${client.company}</p>
+            </div>
+          </div>
+          
+          ${projects.length > 0 ? `
+            <div class="projects-in-card">
+              <h4>Projects (${projects.length})</h4>
+              <ul class="project-list">
+                ${projects.map(proj => `
+                  <li class="project-list-item" onclick="editProject('${client.id}', '${proj.id}')">
+                    <div>
+                      <div>${proj.name}</div>
+                      <div class="progress">
+                        <div class="progress-mini">
+                          <div class="progress-mini-fill" style="width: ${proj.progress || 0}%"></div>
+                        </div>
+                        <span>${proj.progress || 0}%</span>
+                      </div>
+                    </div>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          ` : `
+            <div style="padding: 1rem; text-align: center; color: var(--muted); font-size: 0.85rem;">
+              No projects yet
+            </div>
+          `}
+        </div>
+      `;
+    }).join('');
+  }
+
+  function loadClientSelect() {
+    const clients = Auth.getAllClients();
+    const select = document.getElementById('projectClient');
+    select.innerHTML = '<option value="">-- Choose a client --</option>' + 
+      clients.map(client => `<option value="${client.id}">${client.name} (${client.company})</option>`).join('');
+  }
+
+  function switchTab(tabName) {
+    // Hide all tabs
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.admin-tab').forEach(tab => tab.classList.remove('active'));
+
+    // Show selected tab
+    document.getElementById(tabName).classList.add('active');
+    event.target.classList.add('active');
+
+    // Refresh data
+    if (tabName === 'projects') {
+      loadProjects();
+    }
+  }
+
+  function handleCreateProject(e) {
+    e.preventDefault();
+
+    const clientId = document.getElementById('projectClient').value;
+    const projectName = document.getElementById('projectName').value;
+    const description = document.getElementById('projectDesc').value;
+
+    if (!clientId) {
+      showToast('❌ Please select a client');
+      return;
+    }
+
+    const result = Auth.createProject(clientId, projectName, description);
+
+    if (result.success) {
+      showToast('✓ Project created successfully');
+      document.querySelector('#create form').reset();
+      loadStats();
+      loadProjects();
+      loadClients();
+    } else {
+      showToast('❌ ' + result.message);
+    }
+  }
+
+  function editProject(clientId, projectId) {
+    currentEditingClient = clientId;
+    currentEditingProject = projectId;
+
+    const client = Auth.getUserById(clientId);
+    const project = client.projects.find(p => p.id === projectId);
+
+    document.getElementById('projectModalTitle').textContent = `Manage: ${project.name}`;
+    document.getElementById('modalProjectName').value = project.name;
+    document.getElementById('projectProgress').value = project.progress || 0;
+    document.getElementById('progressValue').textContent = (project.progress || 0) + '%';
+    document.getElementById('projectStatus').value = project.status;
+
+    // Load requirements
+    const reqList = document.getElementById('requirementsList');
+    reqList.innerHTML = (project.requirements || []).map(req => `
+      <li>
+        <span>${req.text}</span>
+        <button type="button" onclick="deleteRequirement('${req.id}')" style="background: none; border: none; color: #ff6b6b; cursor: pointer;">✕</button>
+      </li>
+    `).join('');
+
+    document.getElementById('projectModal').classList.add('show');
+  }
+
+  function closeProjectModal() {
+    document.getElementById('projectModal').classList.remove('show');
+    currentEditingProject = null;
+    currentEditingClient = null;
+  }
+
+  function addRequirement() {
+    const input = document.getElementById('newRequirement');
+    const requirement = input.value.trim();
+
+    if (!requirement) {
+      showToast('❌ Please enter a requirement');
+      return;
+    }
+
+    const result = Auth.addProjectRequirement(currentEditingClient, currentEditingProject, requirement);
+    
+    if (result.success) {
+      input.value = '';
+      
+      // Reload requirements
+      const client = Auth.getUserById(currentEditingClient);
+      const project = client.projects.find(p => p.id === currentEditingProject);
+      const reqList = document.getElementById('requirementsList');
+      reqList.innerHTML = (project.requirements || []).map(req => `
+        <li>
+          <span>${req.text}</span>
+          <button type="button" onclick="deleteRequirement('${req.id}')" style="background: none; border: none; color: #ff6b6b; cursor: pointer;">✕</button>
+        </li>
+      `).join('');
+      
+      showToast('✓ Requirement added');
+    }
+  }
+
+  function deleteRequirement(reqId) {
+    const client = Auth.getUserById(currentEditingClient);
+    const project = client.projects.find(p => p.id === currentEditingProject);
+    project.requirements = project.requirements.filter(r => r.id !== reqId);
+    Auth.updateUser(currentEditingClient, { projects: client.projects });
+    
+    // Reload requirements
+    const reqList = document.getElementById('requirementsList');
+    reqList.innerHTML = (project.requirements || []).map(req => `
+      <li>
+        <span>${req.text}</span>
+        <button type="button" onclick="deleteRequirement('${req.id}')" style="background: none; border: none; color: #ff6b6b; cursor: pointer;">✕</button>
+      </li>
+    `).join('');
+  }
+
+  function saveProjectChanges() {
+    const progress = parseInt(document.getElementById('projectProgress').value);
+    const status = document.getElementById('projectStatus').value;
+
+    const result = Auth.updateProject(currentEditingClient, currentEditingProject, {
+      progress,
+      status
+    });
+
+    if (result.success) {
+      showToast('✓ Project updated');
+      loadStats();
+      loadProjects();
+      loadClients();
+      closeProjectModal();
+    }
+  }
+
+  function deleteClient(clientId) {
+    if (confirm('Are you sure? This will delete the client and all their projects.')) {
+      const result = Auth.deleteUser(clientId);
+      if (result.success) {
+        showToast('✓ Client deleted');
+        loadStats();
+        loadClients();
+        loadProjects();
+        loadClientSelect();
+      }
+    }
+  }
+
+  function manageClient(clientId) {
+    const client = Auth.getUserById(clientId);
+    alert(`Client: ${client.name}\nCompany: ${client.company}\nEmail: ${client.email}\nProjects: ${(client.projects || []).length}`);
+  }
+
+  function handleAdminLogout() {
+    if (confirm('Logout from admin panel?')) {
+      Auth.logoutUser();
+      window.location.href = 'login.html';
+    }
+  }
+
+  // Progress range slider
+  document.getElementById('projectProgress').addEventListener('input', (e) => {
+    document.getElementById('progressValue').textContent = e.target.value + '%';
+  });
+</script>
+
+</body>
+</html>

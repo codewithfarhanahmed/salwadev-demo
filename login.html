@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - SalwaDev</title>
+<link rel="icon" type="image/png" href="assets/images/favicon.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+  /* Login/Register Page Styles */
+  #auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 1rem 2rem;
+    background: linear-gradient(135deg, var(--black) 0%, var(--black2) 100%);
+  }
+
+  .auth-wrapper {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .auth-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .auth-header .logo {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+  }
+
+  .auth-header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .auth-header p {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    background: var(--black);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  .form-group input::placeholder {
+    color: var(--muted2);
+  }
+
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--acid);
+    box-shadow: 0 0 0 3px rgba(200, 255, 0, 0.1);
+  }
+
+  .auth-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--acid);
+    color: #0a0a0a;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 1rem;
+  }
+
+  .auth-btn:hover {
+    background: var(--acid-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .auth-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .form-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .form-divider::before,
+  .form-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .toggle-form {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+  }
+
+  .toggle-form button {
+    background: none;
+    border: none;
+    color: var(--acid);
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: underline;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+
+  .toggle-form button:hover {
+    color: var(--acid-hover);
+  }
+
+  .error-message, .success-message {
+    padding: 0.9rem 1rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .error-message {
+    background: rgba(255, 67, 67, 0.1);
+    border: 1px solid rgba(255, 67, 67, 0.3);
+    color: #ff6b6b;
+  }
+
+  .success-message {
+    background: rgba(200, 255, 0, 0.1);
+    border: 1px solid rgba(200, 255, 0, 0.3);
+    color: var(--acid);
+  }
+
+  .form-group.hidden {
+    display: none;
+  }
+
+  .features-list {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .features-list h3 {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .features-list ul {
+    list-style: none;
+  }
+
+  .features-list li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .features-list li::before {
+    content: '✓';
+    color: var(--acid);
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    #auth-container {
+      padding: 7rem 1rem 1rem;
+    }
+
+    .auth-box {
+      padding: 2rem;
+    }
+
+    .auth-header h1 {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+  </div>
+  <div class="nav-right">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Auth Container -->
+<div id="auth-container">
+  <div class="auth-wrapper">
+    <!-- Login Form -->
+    <div class="auth-box" id="loginForm">
+      <div class="auth-header">
+        <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+        <h1>Welcome Back</h1>
+        <p>Login to access your project portal</p>
+      </div>
+
+      <div id="loginError" class="error-message" style="display:none;"></div>
+
+      <form onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginId">User ID</label>
+          <input type="text" id="loginId" placeholder="Your User ID" required>
+        </div>
+
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="auth-btn">Login</button>
+      </form>
+
+      <div class="form-divider">New here?</div>
+
+      <div class="toggle-form">
+        Don't have an account?
+        <button type="button" onclick="toggleAuthForms()">Create Account</button>
+      </div>
+
+      <div class="features-list">
+        <h3>Demo Credentials</h3>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.75rem;">
+          Use these to explore:
+        </p>
+        <div style="background: rgba(200,255,0,0.05); border: 1px solid rgba(200,255,0,0.15); padding: 0.75rem; border-radius: var(--radius); font-size: 0.8rem; font-family: var(--font-mono);">
+          <div><strong>ID:</strong> S@lwadev</div>
+          <div><strong>Password:</strong> S@lwadev123</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div class="auth-box" id="registerForm" style="display:none;">
+      <div class="auth-header">
+        <a href="index.html" class="logo">Salwa<span>Dev</span></a>
+        <h1>Create Account</h1>
+        <p>Join our client portal system</p>
+      </div>
+
+      <div id="registerError" class="error-message" style="display:none;"></div>
+      <div id="registerSuccess" class="success-message" style="display:none;"></div>
+
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="regName">Full Name</label>
+          <input type="text" id="regName" placeholder="Your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">Email Address</label>
+          <input type="email" id="regEmail" placeholder="your@email.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regCompany">Company Name</label>
+          <input type="text" id="regCompany" placeholder="Your company" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regId">User ID</label>
+          <input type="text" id="regId" placeholder="Choose a username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
+        </div>
+
+        <div class="form-group">
+          <label for="regConfirm">Confirm Password</label>
+          <input type="password" id="regConfirm" placeholder="Confirm password" required>
+        </div>
+
+        <button type="submit" class="auth-btn">Create Account</button>
+      </form>
+
+      <div class="form-divider">Already have an account?</div>
+
+      <div class="toggle-form">
+        <button type="button" onclick="toggleAuthForms()">Back to Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script src="auth.js"></script>
+<script>
+  // Toggle between login and register forms
+  function toggleAuthForms() {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    
+    loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+    registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
+  }
+
+  // Handle login
+  function handleLogin(e) {
+    e.preventDefault();
+    
+    const id = document.getElementById('loginId').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorDiv = document.getElementById('loginError');
+    
+    const result = Auth.loginUser(id, password);
+    
+    if (result.success) {
+      showToast('Login successful! Redirecting...');
+      setTimeout(() => {
+        const user = Auth.getCurrentUser();
+        if (user.role === 'admin') {
+          window.location.href = 'admin-dashboard.html';
+        } else {
+          window.location.href = 'client-management.html';
+        }
+      }, 1000);
+    } else {
+      errorDiv.textContent = '❌ ' + result.message;
+      errorDiv.style.display = 'block';
+    }
+  }
+
+  // Handle registration
+  function handleRegister(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const company = document.getElementById('regCompany').value;
+    const id = document.getElementById('regId').value;
+    const password = document.getElementById('regPassword').value;
+    const confirm = document.getElementById('regConfirm').value;
+    
+    const errorDiv = document.getElementById('registerError');
+    const successDiv = document.getElementById('registerSuccess');
+    
+    errorDiv.style.display = 'none';
+    successDiv.style.display = 'none';
+    
+    // Validation
+    if (password !== confirm) {
+      errorDiv.textContent = '❌ Passwords do not match';
+      errorDiv.style.display = 'block';
+      return;
+    }
+    
+    if (password.length < 6) {
+      errorDiv.textContent = '❌ Password must be at least 6 characters';
+      errorDiv.style.display = 'block';
+      return;
+    }
+    
+    const result = Auth.registerUser(id, password, name, email, company);
+    
+    if (result.success) {
+      successDiv.textContent = '✓ ' + result.message + '! Logging you in...';
+      successDiv.style.display = 'block';
+      
+      // Clear form
+      document.querySelector('#registerForm form').reset();
+      
+      // Auto-login and redirect
+      setTimeout(() => {
+        Auth.loginUser(id, password);
+        showToast('Account created and logged in!');
+        setTimeout(() => {
+          window.location.href = 'client-management.html';
+        }, 500);
+      }, 1500);
+    } else {
+      errorDiv.textContent = '❌ ' + result.message;
+      errorDiv.style.display = 'block';
+    }
+  }
+
+  // Redirect if already logged in
+  window.addEventListener('load', () => {
+    if (Auth.isLoggedIn()) {
+      const user = Auth.getCurrentUser();
+      if (user.role === 'admin') {
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        window.location.href = 'client-management.html';
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
